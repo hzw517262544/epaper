@@ -1,25 +1,25 @@
 body {
-    word-break:break-all;
+	word-break:break-all;
 	background-color:#EEF2FB;
 	font-size:12px;
 	margin:0 auto;
 	text-align:center;
-	}
+}
 table.colorTest {
-    border-top: 1px solid #E7EEF5;
-    border-left: 1px solid #E7EEF5;
-    border-right: 0px;
-    border-bottom: 0px;
+	border-top: 1px solid #E7EEF5;
+	border-left: 1px solid #E7EEF5;
+	border-right: 0px;
+	border-bottom: 0px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	line-height: 25px;
 	color: #666666;
-} 
+}
 table.colorTest td {
-    border-top: 1px solid #FFFFFF;
-    border-left: 1px solid #FFFFFF;
-    border-right: 1px solid #E7EEF5;
-    border-bottom: 1px solid #E7EEF5;
+	border-top: 1px solid #FFFFFF;
+	border-left: 1px solid #FFFFFF;
+	border-right: 1px solid #E7EEF5;
+	border-bottom: 1px solid #E7EEF5;
 }
 .login_top_bg {
 	background-image: url(login-top-bg.gif);
@@ -53,7 +53,7 @@ table.colorTest td {
 	text-decoration: none;
 	height: 38px;
 	width: 100%;
-	position: �̶�;
+	position: ΉΜΆ¨;
 	line-height: 38px;
 }
 .login_txt_bt {
