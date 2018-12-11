@@ -1,631 +1,631 @@
-var cal;  
-var isFocus=false; //ÊÇ·ñÎª½¹µã  
-var pickMode ={  
-    "second":1,  
-    "minute":2,  
-    "hour":3,  
-    "day":4,  
-    "month":5,  
-    "year":6  };  
-      
-var topY=0,leftX=0;  //×Ô¶¨Òå¶¨Î»Æ«ÒÆÁ¿ 2007-02-11 ÓÉ º®Óğ·ãÌí¼Ó  
-//Ñ¡ÔñÈÕÆÚ ¡ú ÓÉ º®Óğ·ã 2007-06-10 Ìí¼Ó£¬Í¨¹ı ID À´Ñ¡ÈÕÆÚ  
-function SelectDateById(id,strFormat,x,y)  
-{  
-    var obj = document.getElementById(id);  
-    if(obj == null){return false;}  
-    obj.focus();  
-    if(obj.onclick != null){obj.onclick();}  
-    else if(obj.click != null){obj.click();}  
-    else{SelectDate(obj,strFormat,x,y)}  
-}  
-  
-//Ñ¡ÔñÈÕÆÚ ¡ú ÓÉ º®Óğ·ã 2006-06-25 Ìí¼Ó  
-function SelectDate(obj,strFormat,x,y)  
-{  
-  
-    leftX =(x == null) ? leftX : x;  
-    topY  =(y == null) ? topY : y;//×Ô¶¨Òå¶¨Î»Æ«ÒÆÁ¿ 2007-02-11 ÓÉ º®Óğ·ãÌí¼Ó   
-    if(document.getElementById("ContainerPanel")==null){InitContainerPanel();}  
-    var date = new Date();  
-    var by = date.getFullYear()-50;  //×îĞ¡Öµ ¡ú 50 ÄêÇ°  
-    var ey = date.getFullYear()+50;  //×î´óÖµ ¡ú 50 Äêºó  
-    //cal = new Calendar(by, ey,1,strFormat);    //³õÊ¼»¯Ó¢ÎÄ°æ£¬0 ÎªÖĞÎÄ°æ  
-    cal = (cal==null) ? new Calendar(by, ey, 0) : cal;    //²»ÓÃÃ¿´Î¶¼³õÊ¼»¯ 2006-12-03 ĞŞÕı  
-    cal.DateMode =pickMode["second"]; //¸´Î»  
-      if(strFormat.indexOf('s')< 0) {cal.DateMode =pickMode["minute"];}//¾«¶ÈÎª·Ö  
-      if(strFormat.indexOf('m')< 0) {cal.DateMode =pickMode["hour"];}//¾«¶ÈÎªÊ±  
-      if(strFormat.indexOf('h')< 0) {cal.DateMode =pickMode["day"];}//¾«¶ÈÎªÈÕ  
-      if(strFormat.indexOf('d')< 0) {cal.DateMode =pickMode["month"];}//¾«¶ÈÎªÔÂ  
-      if(strFormat.indexOf('M')< 0) {cal.DateMode =pickMode["year"];}//¾«¶ÈÎªÄê  
-      if(strFormat.indexOf('y')< 0) {cal.DateMode =pickMode["second"];}//Ä¬ÈÏ¾«¶ÈÎªÃë  
-    cal.dateFormatStyleOld = cal.dateFormatStyle;  
-    cal.dateFormatStyle = strFormat;  
-    cal.show(obj);  
-}  
+var cal;
+var isFocus=false; //æ˜¯å¦ä¸ºç„¦ç‚¹
+var pickMode ={
+    "second":1,
+    "minute":2,
+    "hour":3,
+    "day":4,
+    "month":5,
+    "year":6  };
+
+var topY=0,leftX=0;  //è‡ªå®šä¹‰å®šä½åç§»é‡ 2007-02-11 ç”± å¯’ç¾½æ«æ·»åŠ 
+//é€‰æ‹©æ—¥æœŸ â†’ ç”± å¯’ç¾½æ« 2007-06-10 æ·»åŠ ï¼Œé€šè¿‡ ID æ¥é€‰æ—¥æœŸ
+function SelectDateById(id,strFormat,x,y)
+{
+    var obj = document.getElementById(id);
+    if(obj == null){return false;}
+    obj.focus();
+    if(obj.onclick != null){obj.onclick();}
+    else if(obj.click != null){obj.click();}
+    else{SelectDate(obj,strFormat,x,y)}
+}
+
+//é€‰æ‹©æ—¥æœŸ â†’ ç”± å¯’ç¾½æ« 2006-06-25 æ·»åŠ 
+function SelectDate(obj,strFormat,x,y)
+{
+
+    leftX =(x == null) ? leftX : x;
+    topY  =(y == null) ? topY : y;//è‡ªå®šä¹‰å®šä½åç§»é‡ 2007-02-11 ç”± å¯’ç¾½æ«æ·»åŠ 
+    if(document.getElementById("ContainerPanel")==null){InitContainerPanel();}
+    var date = new Date();
+    var by = date.getFullYear()-50;  //æœ€å°å€¼ â†’ 50 å¹´å‰
+    var ey = date.getFullYear()+50;  //æœ€å¤§å€¼ â†’ 50 å¹´å
+    //cal = new Calendar(by, ey,1,strFormat);    //åˆå§‹åŒ–è‹±æ–‡ç‰ˆï¼Œ0 ä¸ºä¸­æ–‡ç‰ˆ
+    cal = (cal==null) ? new Calendar(by, ey, 0) : cal;    //ä¸ç”¨æ¯æ¬¡éƒ½åˆå§‹åŒ– 2006-12-03 ä¿®æ­£
+    cal.DateMode =pickMode["second"]; //å¤ä½
+    if(strFormat.indexOf('s')< 0) {cal.DateMode =pickMode["minute"];}//ç²¾åº¦ä¸ºåˆ†
+    if(strFormat.indexOf('m')< 0) {cal.DateMode =pickMode["hour"];}//ç²¾åº¦ä¸ºæ—¶
+    if(strFormat.indexOf('h')< 0) {cal.DateMode =pickMode["day"];}//ç²¾åº¦ä¸ºæ—¥
+    if(strFormat.indexOf('d')< 0) {cal.DateMode =pickMode["month"];}//ç²¾åº¦ä¸ºæœˆ
+    if(strFormat.indexOf('M')< 0) {cal.DateMode =pickMode["year"];}//ç²¾åº¦ä¸ºå¹´
+    if(strFormat.indexOf('y')< 0) {cal.DateMode =pickMode["second"];}//é»˜è®¤ç²¾åº¦ä¸ºç§’
+    cal.dateFormatStyleOld = cal.dateFormatStyle;
+    cal.dateFormatStyle = strFormat;
+    cal.show(obj);
+}
 /**//**//**//**//**//**//**//**
-* ·µ»ØÈÕÆÚ
-* @param d the delimiter
-* @param p the pattern of your date
-2006-06-25 ÓÉ º®Óğ·ã ĞŞ¸ÄÎª¸ù¾İÓÃ»§Ö¸¶¨µÄ style À´È·¶¨£»
-*/  
-String.prototype.toDate = function(style) {  
-  var y = this.substring(style.indexOf('y'),style.lastIndexOf('y')+1);//Äê  
-  var M = this.substring(style.indexOf('M'),style.lastIndexOf('M')+1);//ÔÂ  
-  var d = this.substring(style.indexOf('d'),style.lastIndexOf('d')+1);//ÈÕ  
-  var h = this.substring(style.indexOf('h'),style.lastIndexOf('h')+1);//Ê±  
-  var m = this.substring(style.indexOf('m'),style.lastIndexOf('m')+1);//·Ö  
-  var s = this.substring(style.indexOf('s'),style.lastIndexOf('s')+1);//Ãë  
-  
-  if(s == null ||s == "" || isNaN(s)) {s = new Date().getSeconds();}  
-  if(m == null ||m == "" || isNaN(m)) {m = new Date().getMinutes();}  
-  if(h == null ||h == "" || isNaN(h)) {h = new Date().getHours();}  
-  if(d == null ||d == "" || isNaN(d)) {d = new Date().getDate();}  
-  if(M == null ||M == "" || isNaN(M)) {M = new Date().getMonth()+1;}  
-  if(y == null ||y == "" || isNaN(y)) {y = new Date().getFullYear();}  
-  var dt ;  
-  eval ("dt = new Date('"+ y+"', '"+(M-1)+"','"+ d+"','"+ h+"','"+ m+"','"+ s +"')");  
-  return dt;  
-}  
-  
+ * è¿”å›æ—¥æœŸ
+ * @param d the delimiter
+ * @param p the pattern of your date
+ 2006-06-25 ç”± å¯’ç¾½æ« ä¿®æ”¹ä¸ºæ ¹æ®ç”¨æˆ·æŒ‡å®šçš„ style æ¥ç¡®å®šï¼›
+ */
+String.prototype.toDate = function(style) {
+    var y = this.substring(style.indexOf('y'),style.lastIndexOf('y')+1);//å¹´
+    var M = this.substring(style.indexOf('M'),style.lastIndexOf('M')+1);//æœˆ
+    var d = this.substring(style.indexOf('d'),style.lastIndexOf('d')+1);//æ—¥
+    var h = this.substring(style.indexOf('h'),style.lastIndexOf('h')+1);//æ—¶
+    var m = this.substring(style.indexOf('m'),style.lastIndexOf('m')+1);//åˆ†
+    var s = this.substring(style.indexOf('s'),style.lastIndexOf('s')+1);//ç§’
+
+    if(s == null ||s == "" || isNaN(s)) {s = new Date().getSeconds();}
+    if(m == null ||m == "" || isNaN(m)) {m = new Date().getMinutes();}
+    if(h == null ||h == "" || isNaN(h)) {h = new Date().getHours();}
+    if(d == null ||d == "" || isNaN(d)) {d = new Date().getDate();}
+    if(M == null ||M == "" || isNaN(M)) {M = new Date().getMonth()+1;}
+    if(y == null ||y == "" || isNaN(y)) {y = new Date().getFullYear();}
+    var dt ;
+    eval ("dt = new Date('"+ y+"', '"+(M-1)+"','"+ d+"','"+ h+"','"+ m+"','"+ s +"')");
+    return dt;
+}
+
 /**//**//**//**//**//**//**//**
-* ¸ñÊ½»¯ÈÕÆÚ
-* @param   d the delimiter
-* @param   p the pattern of your date
-* @author  meizz
-*/  
-Date.prototype.format = function(style) {  
-  var o = {  
-    "M+" : this.getMonth() + 1, //month  
-    "d+" : this.getDate(),      //day  
-    "h+" : this.getHours(),     //hour  
-    "m+" : this.getMinutes(),   //minute  
-    "s+" : this.getSeconds(),   //second  
-    "w+" : "ÌìÒ»¶şÈıËÄÎåÁù".charAt(this.getDay()),   //week  
-    "q+" : Math.floor((this.getMonth() + 3) / 3),  //quarter  
-    "S"  : this.getMilliseconds() //millisecond  
-  }  
-  if(/(y+)/.test(style)) {  
-    style = style.replace(RegExp.$1,  
-    (this.getFullYear() + "").substr(4 - RegExp.$1.length));  
-  }  
-  for(var k in o){  
-    if(new RegExp("("+ k +")").test(style)){  
-      style = style.replace(RegExp.$1,  
-        RegExp.$1.length == 1 ? o[k] :  
-        ("00" + o[k]).substr(("" + o[k]).length));  
-    }  
-  }  
-  return style;  
-}  
-  
-//2007-09-14  ÓÉº®Óğ·ãÌí¼Ó·µ»ØËùÑ¡ÈÕÆÚ  
-Calendar.prototype.ReturnDate = function(dt) {  
-    if (this.dateControl != null){this.dateControl.value = dt;}  
-    calendar.hide();  
-    if(this.dateControl.onchange == null){return;}   
-    //½« onchange ×ª³ÉÆäËüº¯Êı£¬ÒÔÃâ´¥·¢ÑéÖ¤ÊÂ¼ş  
-    var ev = this.dateControl.onchange.toString(); //ÕÒ³öº¯ÊıµÄ×Ö´®  
-    ev = ev.substring(  
-            ((ev.indexOf("ValidatorOnChange();")> 0) ? ev.indexOf("ValidatorOnChange();") + 20 : ev.indexOf("{") + 1)  
-                , ev.lastIndexOf("}"));//È¥³ıÑéÖ¤º¯Êı ValidatorOnChange();  
-    var fun = new Function(ev);     //ÖØĞÂ¶¨Òåº¯Êı  
-    this.dateControl.changeEvent = fun;   
-    this.dateControl.changeEvent();//´¥·¢×Ô¶¨Òå changeEvent º¯Êı  
-}  
-  
+ * æ ¼å¼åŒ–æ—¥æœŸ
+ * @param   d the delimiter
+ * @param   p the pattern of your date
+ * @author  meizz
+ */
+Date.prototype.format = function(style) {
+    var o = {
+        "M+" : this.getMonth() + 1, //month
+        "d+" : this.getDate(),      //day
+        "h+" : this.getHours(),     //hour
+        "m+" : this.getMinutes(),   //minute
+        "s+" : this.getSeconds(),   //second
+        "w+" : "å¤©ä¸€äºŒä¸‰å››äº”å…­".charAt(this.getDay()),   //week
+        "q+" : Math.floor((this.getMonth() + 3) / 3),  //quarter
+        "S"  : this.getMilliseconds() //millisecond
+    }
+    if(/(y+)/.test(style)) {
+        style = style.replace(RegExp.$1,
+            (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for(var k in o){
+        if(new RegExp("("+ k +")").test(style)){
+            style = style.replace(RegExp.$1,
+                RegExp.$1.length == 1 ? o[k] :
+                    ("00" + o[k]).substr(("" + o[k]).length));
+        }
+    }
+    return style;
+}
+
+//2007-09-14  ç”±å¯’ç¾½æ«æ·»åŠ è¿”å›æ‰€é€‰æ—¥æœŸ
+Calendar.prototype.ReturnDate = function(dt) {
+    if (this.dateControl != null){this.dateControl.value = dt;}
+    calendar.hide();
+    if(this.dateControl.onchange == null){return;}
+    //å°† onchange è½¬æˆå…¶å®ƒå‡½æ•°ï¼Œä»¥å…è§¦å‘éªŒè¯äº‹ä»¶
+    var ev = this.dateControl.onchange.toString(); //æ‰¾å‡ºå‡½æ•°çš„å­—ä¸²
+    ev = ev.substring(
+        ((ev.indexOf("ValidatorOnChange();")> 0) ? ev.indexOf("ValidatorOnChange();") + 20 : ev.indexOf("{") + 1)
+        , ev.lastIndexOf("}"));//å»é™¤éªŒè¯å‡½æ•° ValidatorOnChange();
+    var fun = new Function(ev);     //é‡æ–°å®šä¹‰å‡½æ•°
+    this.dateControl.changeEvent = fun;
+    this.dateControl.changeEvent();//è§¦å‘è‡ªå®šä¹‰ changeEvent å‡½æ•°
+}
+
 /**//**//**//**//**//**//**//**
-* ÈÕÀúÀà
-* @param   beginYear 1990
-* @param   endYear   2010
-* @param   lang      0(ÖĞÎÄ)|1(Ó¢Óï) ¿É×ÔÓÉÀ©³ä
-* @param   dateFormatStyle  "yyyy-MM-dd";
-* @version 2006-04-01
-* @author  KimSoft (jinqinghua [at] gmail.com)
-* @update
-*/  
-function Calendar(beginYear, endYear, lang, dateFormatStyle) {  
-  this.beginYear = 1950;  
-  this.endYear = 2050;  
-  this.lang = 0;            //0(ÖĞÎÄ) | 1(Ó¢ÎÄ)  
-  this.dateFormatStyle = "yyyy-MM-dd hh:mm:ss";  
-  
-  if (beginYear != null && endYear != null){  
-    this.beginYear = beginYear;  
-    this.endYear = endYear;  
-  }  
-  if (lang != null){  
-    this.lang = lang  
-  }  
-  
-  if (dateFormatStyle != null){  
-    this.dateFormatStyle = dateFormatStyle  
-  }  
-  
-  this.dateControl = null;  
-  this.panel = this.getElementById("calendarPanel");  
-  this.container = this.getElementById("ContainerPanel");  
-  this.form  = null;  
-  
-  this.date = new Date();  
-  this.year = this.date.getFullYear();  
-  this.month = this.date.getMonth();  
-   
-  this.day = this.date.getDate();  
-  this.hour = this.date.getHours();  
-  this.minute = this.date.getMinutes();  
-  this.second = this.date.getSeconds();  
-  
-  this.colors = {  
-  "cur_word"      : "#FFFFFF",  //µ±ÈÕÈÕÆÚÎÄ×ÖÑÕÉ«  
-  "cur_bg"        : "#00FF00",  //µ±ÈÕÈÕÆÚµ¥Ôª¸ñ±³Ó°É«  
-  "sel_bg"        : "#FFCCCC",  //ÒÑ±»Ñ¡ÔñµÄÈÕÆÚµ¥Ôª¸ñ±³Ó°É« 2006-12-03 º®Óğ·ãÌí¼Ó   
-  "sun_word"      : "#FF0000",  //ĞÇÆÚÌìÎÄ×ÖÑÕÉ«   
-  "sat_word"      : "#0000FF",  //ĞÇÆÚÁùÎÄ×ÖÑÕÉ«   
-  "td_word_light" : "#333333",  //µ¥Ôª¸ñÎÄ×ÖÑÕÉ«   
-  "td_word_dark"  : "#CCCCCC",  //µ¥Ôª¸ñÎÄ×Ö°µÉ«   
-  "td_bg_out"     : "#EFEFEF",  //µ¥Ôª¸ñ±³Ó°É«  
-  "td_bg_over"    : "#FFCC00",  //µ¥Ôª¸ñ±³Ó°É«  
-  "tr_word"       : "#FFFFFF",  //ÈÕÀúÍ·ÎÄ×ÖÑÕÉ«   
-  "tr_bg"         : "#666666",  //ÈÕÀúÍ·±³Ó°É«  
-  "input_border"  : "#CCCCCC",  //input¿Ø¼şµÄ±ß¿òÑÕÉ«   
-  "input_bg"      : "#EFEFEF"   //input¿Ø¼şµÄ±³Ó°É«  
-  }  
-/* //2008-01-29 ·Åµ½ÁË show £¬ÒòÎªÒª×ö pickMode ÅĞ¶Ï
-  this.draw();
-  this.bindYear();
-  this.bindMonth();
-  */  
-  //this.changeSelect();  
-  //this.bindData(); //2006-12-30 ÓÉÃñ¹¤.×©¼Ò×¢ÊÍ  
-}  
-  
+ * æ—¥å†ç±»
+ * @param   beginYear 1990
+ * @param   endYear   2010
+ * @param   lang      0(ä¸­æ–‡)|1(è‹±è¯­) å¯è‡ªç”±æ‰©å……
+ * @param   dateFormatStyle  "yyyy-MM-dd";
+ * @version 2006-04-01
+ * @author  KimSoft (jinqinghua [at] gmail.com)
+ * @update
+ */
+function Calendar(beginYear, endYear, lang, dateFormatStyle) {
+    this.beginYear = 1950;
+    this.endYear = 2050;
+    this.lang = 0;            //0(ä¸­æ–‡) | 1(è‹±æ–‡)
+    this.dateFormatStyle = "yyyy-MM-dd hh:mm:ss";
+
+    if (beginYear != null && endYear != null){
+        this.beginYear = beginYear;
+        this.endYear = endYear;
+    }
+    if (lang != null){
+        this.lang = lang
+    }
+
+    if (dateFormatStyle != null){
+        this.dateFormatStyle = dateFormatStyle
+    }
+
+    this.dateControl = null;
+    this.panel = this.getElementById("calendarPanel");
+    this.container = this.getElementById("ContainerPanel");
+    this.form  = null;
+
+    this.date = new Date();
+    this.year = this.date.getFullYear();
+    this.month = this.date.getMonth();
+
+    this.day = this.date.getDate();
+    this.hour = this.date.getHours();
+    this.minute = this.date.getMinutes();
+    this.second = this.date.getSeconds();
+
+    this.colors = {
+        "cur_word"      : "#FFFFFF",  //å½“æ—¥æ—¥æœŸæ–‡å­—é¢œè‰²
+        "cur_bg"        : "#00FF00",  //å½“æ—¥æ—¥æœŸå•å…ƒæ ¼èƒŒå½±è‰²
+        "sel_bg"        : "#FFCCCC",  //å·²è¢«é€‰æ‹©çš„æ—¥æœŸå•å…ƒæ ¼èƒŒå½±è‰² 2006-12-03 å¯’ç¾½æ«æ·»åŠ 
+        "sun_word"      : "#FF0000",  //æ˜ŸæœŸå¤©æ–‡å­—é¢œè‰²
+        "sat_word"      : "#0000FF",  //æ˜ŸæœŸå…­æ–‡å­—é¢œè‰²
+        "td_word_light" : "#333333",  //å•å…ƒæ ¼æ–‡å­—é¢œè‰²
+        "td_word_dark"  : "#CCCCCC",  //å•å…ƒæ ¼æ–‡å­—æš—è‰²
+        "td_bg_out"     : "#EFEFEF",  //å•å…ƒæ ¼èƒŒå½±è‰²
+        "td_bg_over"    : "#FFCC00",  //å•å…ƒæ ¼èƒŒå½±è‰²
+        "tr_word"       : "#FFFFFF",  //æ—¥å†å¤´æ–‡å­—é¢œè‰²
+        "tr_bg"         : "#666666",  //æ—¥å†å¤´èƒŒå½±è‰²
+        "input_border"  : "#CCCCCC",  //inputæ§ä»¶çš„è¾¹æ¡†é¢œè‰²
+        "input_bg"      : "#EFEFEF"   //inputæ§ä»¶çš„èƒŒå½±è‰²
+    }
+    /* //2008-01-29 æ”¾åˆ°äº† show ï¼Œå› ä¸ºè¦åš pickMode åˆ¤æ–­
+      this.draw();
+      this.bindYear();
+      this.bindMonth();
+      */
+    //this.changeSelect();
+    //this.bindData(); //2006-12-30 ç”±æ°‘å·¥.ç –å®¶æ³¨é‡Š
+}
+
 /**//**//**//**//**//**//**//**
-* ÈÕÀúÀàÊôĞÔ£¨ÓïÑÔ°ü£¬¿É×ÔÓÉÀ©Õ¹£©
-*/  
-Calendar.language = {  
-  "year"   : [[""], [""]],  
-  "months" : [["Ò»ÔÂ","¶şÔÂ","ÈıÔÂ","ËÄÔÂ","ÎåÔÂ","ÁùÔÂ","ÆßÔÂ","°ËÔÂ","¾ÅÔÂ","Ê®ÔÂ","Ê®Ò»ÔÂ","Ê®¶şÔÂ"],  
-        ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]  
-         ],  
-  "weeks"  : [["ÈÕ","Ò»","¶ş","Èı","ËÄ","Îå","Áù"],  
-        ["SUN","MON","TUR","WED","THU","FRI","SAT"]  
-         ],  
-  "hour"  : [["Ê±"], ["H"]],  
-  "minute"  : [["·Ö"], ["M"]],  
-  "second"  : [["Ãë"], ["S"]],  
-  "clear"  : [["Çå¿Õ"], ["CLS"]],  
-  "today"  : [["½ñÌì"], ["TODAY"]],  
-  "pickTxt"  : [["È·¶¨"], ["OK"]],//pickMode ¾«È·µ½Äê¡¢ÔÂÊ±°Ñ½ñÌì±ä³É"È·¶¨"  
-  "close"  : [["¹Ø±Õ"], ["CLOSE"]]  
-}  
-  
-Calendar.prototype.draw = function() {  
-  calendar = this;  
-  
-  var mvAry = [];  
-  //mvAry[mvAry.length]  = '  <form name="calendarForm" style="margin: 0px;">'; //Òò <form> ²»ÄÜÇ¶Ì×£¬ 2006-12-01 ÓÉº®Óğ·ã¸ÄÓÃ Div  
-  mvAry[mvAry.length]  = '  <div name="calendarForm" style="margin: 0px;">';  
-  mvAry[mvAry.length]  = '    <table width="100%" border="0" cellpadding="0" cellspacing="1" style="font-size:12px;">';  
-  mvAry[mvAry.length]  = '      <tr>';  
-  mvAry[mvAry.length]  = '        <th align="left" width="1%"><input style="border: 1px solid ' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:16px;height:20px;';  
-  if(calendar.DateMode > pickMode["month"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ¾«È·µ½ÄêÊ±Òş²Ø"ÔÂ"  
-  mvAry[mvAry.length]  ='" name="prevMonth" type="button" id="prevMonth" value="<" /></th>';  
-  mvAry[mvAry.length]  = '        <th align="center" width="98%" nowrap="nowrap"><select name="calendarYear" id="calendarYear" style="font-size:12px;"></select><select name="calendarMonth" id="calendarMonth" style="font-size:12px;';  
-  if(calendar.DateMode > pickMode["month"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ¾«È·µ½ÄêÊ±Òş²Ø"ÔÂ"  
-  mvAry[mvAry.length]  = '"></select></th>';  
-  mvAry[mvAry.length]  = '        <th align="right" width="1%"><input style="border: 1px solid ' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:16px;height:20px;';  
-  if(calendar.DateMode > pickMode["month"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ¾«È·µ½ÄêÊ±Òş²Ø"ÔÂ"  
-  mvAry[mvAry.length]  ='" name="nextMonth" type="button" id="nextMonth" value=">" /></th>';  
-  mvAry[mvAry.length]  = '      </tr>';  
-  mvAry[mvAry.length]  = '    </table>';  
-  mvAry[mvAry.length]  = '    <table id="calendarTable" width="100%" style="border:0px solid #CCCCCC;background-color:#FFFFFF;font-size:12px;';  
-  if(calendar.DateMode >= pickMode["month"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ¾«È·µ½Äê¡¢ÔÂÊ±Òş²Ø"Ìì"  
-  mvAry[mvAry.length]  = '" border="0" cellpadding="3" cellspacing="1">';  
-  mvAry[mvAry.length]  = '      <tr>';  
-  for(var i = 0; i < 7; i++) {  
-    mvAry[mvAry.length]  = '      <th style="font-weight:normal;background-color:' + calendar.colors["tr_bg"] + ';color:' + calendar.colors["tr_word"] + ';">' + Calendar.language["weeks"][this.lang][i] + '</th>';  
-  }  
-  mvAry[mvAry.length]  = '      </tr>';  
-  for(var i = 0; i < 6;i++){  
-    mvAry[mvAry.length]  = '    <tr align="center">';  
-    for(var j = 0; j < 7; j++) {  
-      if (j == 0){  
-        mvAry[mvAry.length]  = '  <td style="cursor:default;color:' + calendar.colors["sun_word"] + ';"></td>';  
-      } else if(j == 6) {  
-        mvAry[mvAry.length]  = '  <td style="cursor:default;color:' + calendar.colors["sat_word"] + ';"></td>';  
-      } else {  
-        mvAry[mvAry.length]  = '  <td style="cursor:default;"></td>';  
-      }  
-    }  
-    mvAry[mvAry.length]  = '    </tr>';  
-  }  
-  
-//2009-03-03 Ìí¼ÓµÄ´úÂë£¬·ÅÖÃÊ±¼äµÄĞĞ  
-  mvAry[mvAry.length]  = '      <tr style="';  
-    if(calendar.DateMode >= pickMode["day"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ¾«È·µ½Ê±ÈÕÒş²Ø"Ê±¼ä"  
-    mvAry[mvAry.length]  = '"><td align="center" colspan="7">';  
-  mvAry[mvAry.length]  = '      <select name="calendarHour" id="calendarHour" style="font-size:12px;"></select>' + Calendar.language["hour"][this.lang];  
-  mvAry[mvAry.length]  = '<span style="'  
-    if(calendar.DateMode >= pickMode["hour"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ¾«È·µ½Ğ¡Ê±Ê±Òş²Ø"·Ö"  
-  mvAry[mvAry.length]  = '"><select name="calendarMinute" id="calendarMinute" style="font-size:12px;"></select>' + Calendar.language["minute"][this.lang]+'</span>';  
-    mvAry[mvAry.length]  = '<span style="'  
-    if(calendar.DateMode >= pickMode["minute"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ¾«È·µ½Ğ¡Ê±¡¢·ÖÊ±Òş²Ø"Ãë"  
-   mvAry[mvAry.length]  = '"><select name="calendarSecond" id="calendarSecond" style="font-size:12px;"></select>'+ Calendar.language["second"][this.lang]+'</span>';  
-  mvAry[mvAry.length]  = '      </td></tr>';  
-   
-  mvAry[mvAry.length]  = '    </table>';  
-  //mvAry[mvAry.length]  = '  </from>';  
-  mvAry[mvAry.length]  = '      <div align="center" style="padding:4px 4px 4px 4px;background-color:' + calendar.colors["input_bg"] + ';">';  
-  mvAry[mvAry.length]  = '        <input name="calendarClear" type="button" id="calendarClear" value="' + Calendar.language["clear"][this.lang] + '" style="border: 1px solid ' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:40px;height:20px;font-size:12px;cursor:pointer;"/>';  
-  mvAry[mvAry.length]  = '        <input name="calendarToday" type="button" id="calendarToday" value="'   
-  mvAry[mvAry.length]  = (calendar.DateMode == pickMode["day"]) ? Calendar.language["today"][this.lang] : Calendar.language["pickTxt"][this.lang];  
-  mvAry[mvAry.length]  = '" style="border: 1px solid ' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:60px;height:20px;font-size:12px;cursor:pointer"/>';  
-  mvAry[mvAry.length]  = '        <input name="calendarClose" type="button" id="calendarClose" value="' + Calendar.language["close"][this.lang] + '" style="border: 1px solid ' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:40px;height:20px;font-size:12px;cursor:pointer"/>';  
-  mvAry[mvAry.length]  = '      </div>';  
-   
-  mvAry[mvAry.length]  = '  </div>';  
-  this.panel.innerHTML = mvAry.join("");  
-   
-  /**//**//**//******** ÒÔÏÂ´úÂëÓÉº®Óğ·ã 2006-12-01 Ìí¼Ó **********/  
-  var obj = this.getElementById("prevMonth");  
-  obj.onclick = function () {calendar.goPrevMonth(calendar);}  
-  obj.onblur = function () {calendar.onblur();}  
-  this.prevMonth= obj;  
-   
-  obj = this.getElementById("nextMonth");  
-  obj.onclick = function () {calendar.goNextMonth(calendar);}  
-  obj.onblur = function () {calendar.onblur();}  
-  this.nextMonth= obj;   
-  
-  obj = this.getElementById("calendarClear");  
-  obj.onclick = function ()   
-  { calendar.ReturnDate(""); /*calendar.dateControl.value = "";calendar.hide();*///2007-09-14 ÓÉº®Óğ·ã×¢ÊÍ  
-  }  
-  this.calendarClear = obj;  
-   
-  obj = this.getElementById("calendarClose");  
-  obj.onclick = function () {calendar.hide();}  
-  this.calendarClose = obj;  
-   
-  obj = this.getElementById("calendarYear");  
-  obj.onchange = function () {calendar.update(calendar);}  
-  obj.onblur = function () {calendar.onblur();}  
-  this.calendarYear = obj;  
-   
-  obj = this.getElementById("calendarMonth");  
-  with(obj)  
-  {  
-    onchange = function () {calendar.update(calendar);}  
-    onblur = function () {calendar.onblur();}  
-  }this.calendarMonth = obj;  
-   
-  obj = this.getElementById("calendarHour");  
-  obj.onchange = function () {calendar.hour = this.options[this.selectedIndex].value;}  
-  obj.onblur = function () {calendar.onblur();}  
-  this.calendarHour = obj;  
-     
-  obj = this.getElementById("calendarMinute");  
-  obj.onchange = function () {calendar.minute = this.options[this.selectedIndex].value;}  
-  obj.onblur = function () {calendar.onblur();}  
-  this.calendarMinute = obj;  
-   
-  obj = this.getElementById("calendarSecond");  
-  obj.onchange = function () {calendar.second = this.options[this.selectedIndex].value;}  
-  obj.onblur = function () {calendar.onblur();}  
-  this.calendarSecond = obj;  
-  
-  obj = this.getElementById("calendarToday");  
-  obj.onclick = function () {  
-  var today = (calendar.DateMode != pickMode["day"]) ?  
-                    new Date(calendar.year,calendar.month,calendar.day,calendar.hour,calendar.minute,calendar.second)  
-                    : new Date();//2008-01-29  
-    calendar.ReturnDate(today.format(calendar.dateFormatStyle));  
-  }  
-  this.calendarToday = obj;  
-}  
-  
-//Äê·İÏÂÀ­¿ò°ó¶¨Êı¾İ  
-Calendar.prototype.bindYear = function() {  
-  var cy = this.calendarYear;//2006-12-01 ÓÉº®Óğ·ãĞŞ¸Ä  
-  cy.length = 0;  
-  for (var i = this.beginYear; i <= this.endYear; i++){  
-    cy.options[cy.length] = new Option(i + Calendar.language["year"][this.lang], i);  
-  }  
-}  
-  
-//ÔÂ·İÏÂÀ­¿ò°ó¶¨Êı¾İ  
-Calendar.prototype.bindMonth = function() {  
-  var cm = this.calendarMonth;//2006-12-01 ÓÉº®Óğ·ãĞŞ¸Ä  
-  cm.length = 0;  
-  for (var i = 0; i < 12; i++){  
-    cm.options[cm.length] = new Option(Calendar.language["months"][this.lang][i], i);  
-  }  
-}  
-  
-//Ğ¡Ê±ÏÂÀ­¿ò°ó¶¨Êı¾İ  
-Calendar.prototype.bindHour = function() {  
-  var ch = this.calendarHour;  
-  if(ch.length > 0){return;}//2009-03-03 ²»ĞèÒªÖØĞÂ°ó¶¨£¬Ìá¸ßĞÔÄÜ  
-  //ch.length = 0;  
-  var h;  
-  for (var i = 0; i < 24; i++){  
-    h = ("00" + i +"").substr(("" + i).length);  
-    ch.options[ch.length] = new Option(h, h);  
-  }  
-}  
-  
-//·ÖÖÓÏÂÀ­¿ò°ó¶¨Êı¾İ  
-Calendar.prototype.bindMinute = function() {  
-  var cM = this.calendarMinute;  
-  if(cM.length > 0){return;}//2009-03-03 ²»ĞèÒªÖØĞÂ°ó¶¨£¬Ìá¸ßĞÔÄÜ  
-  //cM.length = 0;  
-  var M;  
-  for (var i = 0; i < 60; i++){  
-    M = ("00" + i +"").substr(("" + i).length);  
-    cM.options[cM.length] = new Option(M, M);  
-  }  
-}  
-  
-//ÃëÖÓÏÂÀ­¿ò°ó¶¨Êı¾İ  
-Calendar.prototype.bindSecond = function() {  
-  var cs = this.calendarSecond;  
-  if(cs.length > 0){return;}//2009-03-03 ²»ĞèÒªÖØĞÂ°ó¶¨£¬Ìá¸ßĞÔÄÜ  
-  //cs.length = 0;  
-  var s;  
-  for (var i = 0; i < 60; i++){  
-    s = ("00" + i +"").substr(("" + i).length);  
-    cs.options[cs.length] = new Option(s, s);  
-  }  
-}  
-  
-//ÏòÇ°Ò»ÔÂ  
-Calendar.prototype.goPrevMonth = function(e){  
-  if (this.year == this.beginYear && this.month == 0){return;}  
-  this.month--;  
-  if (this.month == -1) {  
-    this.year--;  
-    this.month = 11;  
-  }  
-  this.date = new Date(this.year, this.month, 1);  
-  this.changeSelect();  
-  this.bindData();  
-}  
-  
-//ÏòºóÒ»ÔÂ  
-Calendar.prototype.goNextMonth = function(e){  
-  if (this.year == this.endYear && this.month == 11){return;}  
-  this.month++;  
-  if (this.month == 12) {  
-    this.year++;  
-    this.month = 0;  
-  }  
-  this.date = new Date(this.year, this.month, 1);  
-  this.changeSelect();  
-  this.bindData();  
-}  
-  
-//¸Ä±äSELECTÑ¡ÖĞ×´Ì¬  
-Calendar.prototype.changeSelect = function() {  
-  var cy = this.calendarYear;//2006-12-01 ÓÉº®Óğ·ãĞŞ¸Ä  
-  var cm = this.calendarMonth;  
-  var ch = this.calendarHour;  
-  var cM = this.calendarMinute;  
-  var cs = this.calendarSecond;  
-//2006-12-30 ÓÉÃñ¹¤.×©¼ÒĞŞ¸Ä£¬¼õÉÙÔËËã´ÎÊı  
-  cy[this.date.getFullYear()-this.beginYear].selected = true;  
-  cm[this.date.getMonth()].selected =true;  
-   
-//2009-03-03 Ìí¼Ó£¬³õÊ¼»¯Ê±¼äµÄÖµ  
-  ch[this.hour].selected =true;  
-  cM[this.minute].selected =true;  
-  cs[this.second].selected =true;  
-}  
-  
-//¸üĞÂÄê¡¢ÔÂ  
-Calendar.prototype.update = function (e){  
-  this.year  = e.calendarYear.options[e.calendarYear.selectedIndex].value;//2006-12-01 ÓÉº®Óğ·ãĞŞ¸Ä  
-  this.month = e.calendarMonth.options[e.calendarMonth.selectedIndex].value;  
-  this.date = new Date(this.year, this.month, 1);  
-  //this.changeSelect();  
-  this.bindData();  
-}  
-  
-//°ó¶¨Êı¾İµ½ÔÂÊÓÍ¼  
-Calendar.prototype.bindData = function () {  
-  var calendar = this;  
-    if(calendar.DateMode >= pickMode["month"]){return;}//2008-01-29  
-// var dateArray = this.getMonthViewArray(this.date.getYear(), this.date.getMonth());  
-  //2006-12-30 ÓÉÃñ¹¤.×©¼ÒĞŞ¸Ä ÔÚFirefox ÏÂÄê·İ´íÎó  
-  var dateArray = this.getMonthViewArray(this.date.getFullYear(), this.date.getMonth());  
-var tds = this.getElementById("calendarTable").getElementsByTagName("td");  
-  for(var i = 0; i < tds.length; i++) {  
-  tds[i].style.backgroundColor = calendar.colors["td_bg_out"];  
-    tds[i].onclick = function () {return;}  
-    tds[i].onmouseover = function () {return;}  
-    tds[i].onmouseout = function () {return;}  
-    if (i > dateArray.length - 1) break;  
-    tds[i].innerHTML = dateArray[i];  
-    if (dateArray[i] != " "){  
-      tds[i].bgColorTxt = "td_bg_out"; //2009-03-03 ±£´æ±³¾°É«µÄclass  
-        var cur = new Date();  
-        tds[i].isToday = false;  
-      if (cur.getFullYear() == calendar.date.getFullYear() && cur.getMonth() == calendar.date.getMonth() && cur.getDate() == dateArray[i]) {  
-      //ÊÇ½ñÌìµÄµ¥Ôª¸ñ  
-        tds[i].style.backgroundColor = calendar.colors["cur_bg"];  
-        tds[i].bgColorTxt = "cur_bg";  
-        tds[i].isToday = true;  
-        }  
-    if(calendar.dateControl != null )  
-    {  
-      cur = calendar.dateControl.value.toDate(calendar.dateFormatStyle);  
-      if (cur.getFullYear() == calendar.date.getFullYear() && cur.getMonth() == calendar.date.getMonth()&& cur.getDate() == dateArray[i]) {  
-      //ÊÇÒÑ±»Ñ¡ÖĞµÄµ¥Ôª¸ñ  
-        calendar.selectedDayTD = tds[i];  
-        tds[i].style.backgroundColor = calendar.colors["sel_bg"];  
-        tds[i].bgColorTxt = "sel_bg";  
-      }  
-    }  
-      tds[i].onclick = function () {  
-            if(calendar.DateMode == pickMode["day"]) //2009-03-03 µ±Ñ¡ÔñÈÕÆÚÊ±£¬µã»÷¸ñ×Ó¼´·µ»ØÖµ  
-            {  
-                calendar.ReturnDate(new Date(calendar.date.getFullYear(),  
-                                                    calendar.date.getMonth(),  
-                                                    this.innerHTML).format(calendar.dateFormatStyle));  
-            }  
-            else  
-            {  
-                if(calendar.selectedDayTD != null) //2009-03-03 Çå³ıÒÑÑ¡ÖĞµÄ±³¾°É«  
-                {  
-                    calendar.selectedDayTD.style.backgroundColor =(calendar.selectedDayTD.isToday)? calendar.colors["cur_bg"] : calendar.colors["td_bg_out"];  
-                }  
-                this.style.backgroundColor = calendar.colors["sel_bg"];  
-                calendar.day = this.innerHTML;  
-                calendar.selectedDayTD = this; //2009-03-03 ¼ÇÂ¼ÒÑÑ¡ÖĞµÄÈÕ×Ó  
-            }  
-          }  
-      tds[i].style.cursor ="pointer"; //2007-08-06 ÓÉº®Óğ·ãÌí¼Ó£¬Êó±ê±ä³ÉÊÖÖ¸×´  
-      tds[i].onmouseover = function () {  
-        this.style.backgroundColor = calendar.colors["td_bg_over"];  
-      }  
-      tds[i].onmouseout = function () {  
-        if(calendar.selectedDayTD != this) {  
-        this.style.backgroundColor = calendar.colors[this.bgColorTxt];}  
-      }  
-      tds[i].onblur = function () {calendar.onblur();}  
-    }  
-  }  
-}  
-  
-//¸ù¾İÄê¡¢ÔÂµÃµ½ÔÂÊÓÍ¼Êı¾İ(Êı×éĞÎÊ½)  
-Calendar.prototype.getMonthViewArray = function (y, m) {  
-  var mvArray = [];  
-  var dayOfFirstDay = new Date(y, m, 1).getDay();  
-  var daysOfMonth = new Date(y, m + 1, 0).getDate();  
-  for (var i = 0; i < 42; i++) {  
-    mvArray[i] = " ";  
-  }  
-  for (var i = 0; i < daysOfMonth; i++){  
-    mvArray[i + dayOfFirstDay] = i + 1;  
-  }  
-  return mvArray;  
-}  
-  
-//À©Õ¹ document.getElementById(id) ¶àä¯ÀÀÆ÷¼æÈİĞÔ from meizz tree source  
-Calendar.prototype.getElementById = function(id){  
-  if (typeof(id) != "string" || id == "") return null;  
-  if (document.getElementById) return document.getElementById(id);  
-  if (document.all) return document.all(id);  
-  try {return eval(id);} catch(e){ return null;}  
-}  
-  
-//À©Õ¹ object.getElementsByTagName(tagName)  
-Calendar.prototype.getElementsByTagName = function(object, tagName){  
-  if (document.getElementsByTagName) return document.getElementsByTagName(tagName);  
-  if (document.all) return document.all.tags(tagName);  
-}  
-  
-//È¡µÃHTML¿Ø¼ş¾ø¶ÔÎ»ÖÃ  
-Calendar.prototype.getAbsPoint = function (e){  
-  var x = e.offsetLeft;  
-  var y = e.offsetTop;  
-  while(e = e.offsetParent){  
-    x += e.offsetLeft;  
-    y += e.offsetTop;  
-  }  
-  return {"x": x, "y": y};  
-}  
-  
-//ÏÔÊ¾ÈÕÀú  
-Calendar.prototype.show = function (dateObj, popControl) {  
-  if (dateObj == null){  
-    throw new Error("arguments[0] is necessary")  
-  }  
-  this.dateControl = dateObj;  
-  var now =  new Date();  
-  this.date = (dateObj.value.length > 0) ? new Date(dateObj.value.toDate(this.dateFormatStyle)) : now.format(this.dateFormatStyle).toDate(this.dateFormatStyle) ;//2008-01-29 º®Óğ·ãÌí¼Ó ¡ú ÈôÎª¿ÕÔò¸ù¾İdateFormatStyle³õÊ¼»¯ÈÕÆÚ  
-  
-  if(this.panel.innerHTML==""||cal.dateFormatStyleOld != cal.dateFormatStyle)//2008-01-29 °Ñ¹¹Ôì±í¸ñ·ÅÔÚ´Ë´¦£¬2009-03-03 ÈôÇëÊ¾µÄÑùÊ½¸Ä±ä£¬ÔòÖØĞÂ³õÊ¼»¯  
-  {  
-    this.draw();  
-    this.bindYear();  
-    this.bindMonth();  
-    this.bindHour();  
-    this.bindMinute();  
-    this.bindSecond();  
-  }  
-  this.year = this.date.getFullYear();  
-  this.month = this.date.getMonth();  
-  this.day = this.date.getDate();  
-  this.hour = this.date.getHours();  
-  this.minute = this.date.getMinutes();  
-  this.second = this.date.getSeconds();  
-  this.changeSelect();  
-  this.bindData();  
-  
-  if (popControl == null){  
-    popControl = dateObj;  
-  }  
-  var xy = this.getAbsPoint(popControl);  
-  //this.panel.style.left = xy.x + "px";  
-  //this.panel.style.top = (xy.y + dateObj.offsetHeight) + "px";  
-  this.panel.style.left = (xy.x + leftX)+ "px"; //ÓÉº®Óğ·ã 2007-02-11 ĞŞ¸Ä ¡ú ¼ÓÈë×Ô¶¨ÒåÆ«ÒÆÁ¿  
-  this.panel.style.top = (xy.y + topY + dateObj.offsetHeight) + "px";  
-   
-  //ÓÉº®Óğ·ã 2006-06-25 ĞŞ¸Ä ¡ú °Ñ visibility ±äÎª display£¬²¢Ìí¼ÓÊ§È¥½¹µãµÄÊÂ¼ş  //this.setDisplayStyle("select", "hidden");  
-  //this.panel.style.visibility = "visible";  
-  //this.container.style.visibility = "visible";  
-  this.panel.style.display = "";  
-  this.container.style.display = "";  
-   
-  if( !this.dateControl.isTransEvent)  
-  {  
-    this.dateControl.isTransEvent = true;  
-    /* ÒÑĞ´ÔÚ·µ»ØÖµµÄÊ±ºò  ReturnDate º¯ÊıÖĞ£¬È¥³ıÑéÖ¤ÊÂ¼şµÄº¯Êı
-    this.dateControl.changeEvent = this.dateControl.onchange;//½« onchange ×ª³ÉÆäËüº¯Êı£¬ÒÔÃâ´¥·¢ÑéÖ¤ÊÂ¼ş
-    this.dateControl.onchange = function()
-    {if(typeof(this.changeEvent) =='function'){this.changeEvent();}}*/  
-    if(this.dateControl.onblur != null){  
-    this.dateControl.blurEvent = this.dateControl.onblur;}//2007-09-14 ±£´æÖ÷ÎÄ±¾¿òµÄ onblur £¬Ê¹ÆäÔ­±¾µÄÊÂ¼ş²»±»¸²¸Ç  
-    this.dateControl.onblur = function()  
-    {calendar.onblur();if(typeof(this.blurEvent) =='function'){this.blurEvent();}  
-    }  
-  }  
-   
-  this.container.onmouseover = function(){isFocus=true;}  
-  this.container.onmouseout = function(){isFocus=false;}  
-}  
-  
-//Òş²ØÈÕÀú  
-Calendar.prototype.hide = function() {  
-  //this.setDisplayStyle("select", "visible");  
-  //this.panel.style.visibility = "hidden";  
-  //this.container.style.visibility = "hidden";  
-  this.panel.style.display = "none";  
-  this.container.style.display = "none";  
-  isFocus=false;  
-}  
-  
-//½¹µã×ªÒÆÊ±Òş²ØÈÕÀú ¡ú ÓÉº®Óğ·ã 2006-06-25 Ìí¼Ó  
-Calendar.prototype.onblur = function() {  
-    if(!isFocus){this.hide();}  
-}  
-  
-//ÒÔÏÂÓÉº®Óğ·ã 2007-07-26 ĞŞ¸Ä ¡ú È·±£ÈÕÀúÈİÆ÷½ÚµãÔÚ body ×îºó£¬·ñÔò FireFox ÖĞ²»ÄÜ³öÏÖÔÚ×îÉÏ·½  
-function InitContainerPanel() //³õÊ¼»¯ÈİÆ÷  
-{  
-    var str = '<div id="calendarPanel" style="position: absolute;display: none;z-index:9999; background-color: #FFFFFF;border: 1px solid #CCCCCC;width:175px;font-size:12px;"></div>';  
-    if(document.all)  
-    {  
-        str += '<iframe style="position:absolute;z-index:2000;width:expression(this.previousSibling.offsetWidth);';  
-        str += 'height:expression(this.previousSibling.offsetHeight);';  
-        str += 'left:expression(this.previousSibling.offsetLeft);top:expression(this.previousSibling.offsetTop);';  
-        str += 'display:expression(this.previousSibling.style.display);" scrolling="no" frameborder="no"></iframe>';  
-    }  
-    var div = document.createElement("div");  
-    div.innerHTML = str;  
-    div.id = "ContainerPanel";  
-    div.style.display ="none";  
-    document.body.appendChild(div);  
-}//µ÷ÓÃcalendar.show(dateControl, popControl);  
+ * æ—¥å†ç±»å±æ€§ï¼ˆè¯­è¨€åŒ…ï¼Œå¯è‡ªç”±æ‰©å±•ï¼‰
+ */
+Calendar.language = {
+    "year"   : [[""], [""]],
+    "months" : [["ä¸€æœˆ","äºŒæœˆ","ä¸‰æœˆ","å››æœˆ","äº”æœˆ","å…­æœˆ","ä¸ƒæœˆ","å…«æœˆ","ä¹æœˆ","åæœˆ","åä¸€æœˆ","åäºŒæœˆ"],
+        ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]
+    ],
+    "weeks"  : [["æ—¥","ä¸€","äºŒ","ä¸‰","å››","äº”","å…­"],
+        ["SUN","MON","TUR","WED","THU","FRI","SAT"]
+    ],
+    "hour"  : [["æ—¶"], ["H"]],
+    "minute"  : [["åˆ†"], ["M"]],
+    "second"  : [["ç§’"], ["S"]],
+    "clear"  : [["æ¸…ç©º"], ["CLS"]],
+    "today"  : [["ä»Šå¤©"], ["TODAY"]],
+    "pickTxt"  : [["ç¡®å®š"], ["OK"]],//pickMode ç²¾ç¡®åˆ°å¹´ã€æœˆæ—¶æŠŠä»Šå¤©å˜æˆ"ç¡®å®š"
+    "close"  : [["å…³é—­"], ["CLOSE"]]
+}
+
+Calendar.prototype.draw = function() {
+    calendar = this;
+
+    var mvAry = [];
+    //mvAry[mvAry.length]  = '  <form name="calendarForm" style="margin: 0px;">'; //å›  <form> ä¸èƒ½åµŒå¥—ï¼Œ 2006-12-01 ç”±å¯’ç¾½æ«æ”¹ç”¨ Div
+    mvAry[mvAry.length]  = '  <div name="calendarForm" style="margin: 0px;">';
+    mvAry[mvAry.length]  = '    <table width="100%" border="0" cellpadding="0" cellspacing="1" style="font-size:12px;">';
+    mvAry[mvAry.length]  = '      <tr>';
+    mvAry[mvAry.length]  = '        <th align="left" width="1%"><input style="border: 1px solid ' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:16px;height:20px;';
+    if(calendar.DateMode > pickMode["month"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ç²¾ç¡®åˆ°å¹´æ—¶éšè—"æœˆ"
+    mvAry[mvAry.length]  ='" name="prevMonth" type="button" id="prevMonth" value="<" /></th>';
+    mvAry[mvAry.length]  = '        <th align="center" width="98%" nowrap="nowrap"><select name="calendarYear" id="calendarYear" style="font-size:12px;"></select><select name="calendarMonth" id="calendarMonth" style="font-size:12px;';
+    if(calendar.DateMode > pickMode["month"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ç²¾ç¡®åˆ°å¹´æ—¶éšè—"æœˆ"
+    mvAry[mvAry.length]  = '"></select></th>';
+    mvAry[mvAry.length]  = '        <th align="right" width="1%"><input style="border: 1px solid ' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:16px;height:20px;';
+    if(calendar.DateMode > pickMode["month"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ç²¾ç¡®åˆ°å¹´æ—¶éšè—"æœˆ"
+    mvAry[mvAry.length]  ='" name="nextMonth" type="button" id="nextMonth" value=">" /></th>';
+    mvAry[mvAry.length]  = '      </tr>';
+    mvAry[mvAry.length]  = '    </table>';
+    mvAry[mvAry.length]  = '    <table id="calendarTable" width="100%" style="border:0px solid #CCCCCC;background-color:#FFFFFF;font-size:12px;';
+    if(calendar.DateMode >= pickMode["month"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ç²¾ç¡®åˆ°å¹´ã€æœˆæ—¶éšè—"å¤©"
+    mvAry[mvAry.length]  = '" border="0" cellpadding="3" cellspacing="1">';
+    mvAry[mvAry.length]  = '      <tr>';
+    for(var i = 0; i < 7; i++) {
+        mvAry[mvAry.length]  = '      <th style="font-weight:normal;background-color:' + calendar.colors["tr_bg"] + ';color:' + calendar.colors["tr_word"] + ';">' + Calendar.language["weeks"][this.lang][i] + '</th>';
+    }
+    mvAry[mvAry.length]  = '      </tr>';
+    for(var i = 0; i < 6;i++){
+        mvAry[mvAry.length]  = '    <tr align="center">';
+        for(var j = 0; j < 7; j++) {
+            if (j == 0){
+                mvAry[mvAry.length]  = '  <td style="cursor:default;color:' + calendar.colors["sun_word"] + ';"></td>';
+            } else if(j == 6) {
+                mvAry[mvAry.length]  = '  <td style="cursor:default;color:' + calendar.colors["sat_word"] + ';"></td>';
+            } else {
+                mvAry[mvAry.length]  = '  <td style="cursor:default;"></td>';
+            }
+        }
+        mvAry[mvAry.length]  = '    </tr>';
+    }
+
+//2009-03-03 æ·»åŠ çš„ä»£ç ï¼Œæ”¾ç½®æ—¶é—´çš„è¡Œ
+    mvAry[mvAry.length]  = '      <tr style="';
+    if(calendar.DateMode >= pickMode["day"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ç²¾ç¡®åˆ°æ—¶æ—¥éšè—"æ—¶é—´"
+    mvAry[mvAry.length]  = '"><td align="center" colspan="7">';
+    mvAry[mvAry.length]  = '      <select name="calendarHour" id="calendarHour" style="font-size:12px;"></select>' + Calendar.language["hour"][this.lang];
+    mvAry[mvAry.length]  = '<span style="'
+    if(calendar.DateMode >= pickMode["hour"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ç²¾ç¡®åˆ°å°æ—¶æ—¶éšè—"åˆ†"
+    mvAry[mvAry.length]  = '"><select name="calendarMinute" id="calendarMinute" style="font-size:12px;"></select>' + Calendar.language["minute"][this.lang]+'</span>';
+    mvAry[mvAry.length]  = '<span style="'
+    if(calendar.DateMode >= pickMode["minute"]){mvAry[mvAry.length]  = 'display:none;';}//pickMode ç²¾ç¡®åˆ°å°æ—¶ã€åˆ†æ—¶éšè—"ç§’"
+    mvAry[mvAry.length]  = '"><select name="calendarSecond" id="calendarSecond" style="font-size:12px;"></select>'+ Calendar.language["second"][this.lang]+'</span>';
+    mvAry[mvAry.length]  = '      </td></tr>';
+
+    mvAry[mvAry.length]  = '    </table>';
+    //mvAry[mvAry.length]  = '  </from>';
+    mvAry[mvAry.length]  = '      <div align="center" style="padding:4px 4px 4px 4px;background-color:' + calendar.colors["input_bg"] + ';">';
+    mvAry[mvAry.length]  = '        <input name="calendarClear" type="button" id="calendarClear" value="' + Calendar.language["clear"][this.lang] + '" style="border: 1px solid ' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:40px;height:20px;font-size:12px;cursor:pointer;"/>';
+    mvAry[mvAry.length]  = '        <input name="calendarToday" type="button" id="calendarToday" value="'
+    mvAry[mvAry.length]  = (calendar.DateMode == pickMode["day"]) ? Calendar.language["today"][this.lang] : Calendar.language["pickTxt"][this.lang];
+    mvAry[mvAry.length]  = '" style="border: 1px solid ' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:60px;height:20px;font-size:12px;cursor:pointer"/>';
+    mvAry[mvAry.length]  = '        <input name="calendarClose" type="button" id="calendarClose" value="' + Calendar.language["close"][this.lang] + '" style="border: 1px solid ' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:40px;height:20px;font-size:12px;cursor:pointer"/>';
+    mvAry[mvAry.length]  = '      </div>';
+
+    mvAry[mvAry.length]  = '  </div>';
+    this.panel.innerHTML = mvAry.join("");
+
+    /**//**//**//******** ä»¥ä¸‹ä»£ç ç”±å¯’ç¾½æ« 2006-12-01 æ·»åŠ  **********/
+    var obj = this.getElementById("prevMonth");
+    obj.onclick = function () {calendar.goPrevMonth(calendar);}
+    obj.onblur = function () {calendar.onblur();}
+    this.prevMonth= obj;
+
+    obj = this.getElementById("nextMonth");
+    obj.onclick = function () {calendar.goNextMonth(calendar);}
+    obj.onblur = function () {calendar.onblur();}
+    this.nextMonth= obj;
+
+    obj = this.getElementById("calendarClear");
+    obj.onclick = function ()
+    { calendar.ReturnDate(""); /*calendar.dateControl.value = "";calendar.hide();*///2007-09-14 ç”±å¯’ç¾½æ«æ³¨é‡Š
+    }
+    this.calendarClear = obj;
+
+    obj = this.getElementById("calendarClose");
+    obj.onclick = function () {calendar.hide();}
+    this.calendarClose = obj;
+
+    obj = this.getElementById("calendarYear");
+    obj.onchange = function () {calendar.update(calendar);}
+    obj.onblur = function () {calendar.onblur();}
+    this.calendarYear = obj;
+
+    obj = this.getElementById("calendarMonth");
+    with(obj)
+    {
+        onchange = function () {calendar.update(calendar);}
+        onblur = function () {calendar.onblur();}
+    }this.calendarMonth = obj;
+
+    obj = this.getElementById("calendarHour");
+    obj.onchange = function () {calendar.hour = this.options[this.selectedIndex].value;}
+    obj.onblur = function () {calendar.onblur();}
+    this.calendarHour = obj;
+
+    obj = this.getElementById("calendarMinute");
+    obj.onchange = function () {calendar.minute = this.options[this.selectedIndex].value;}
+    obj.onblur = function () {calendar.onblur();}
+    this.calendarMinute = obj;
+
+    obj = this.getElementById("calendarSecond");
+    obj.onchange = function () {calendar.second = this.options[this.selectedIndex].value;}
+    obj.onblur = function () {calendar.onblur();}
+    this.calendarSecond = obj;
+
+    obj = this.getElementById("calendarToday");
+    obj.onclick = function () {
+        var today = (calendar.DateMode != pickMode["day"]) ?
+            new Date(calendar.year,calendar.month,calendar.day,calendar.hour,calendar.minute,calendar.second)
+            : new Date();//2008-01-29
+        calendar.ReturnDate(today.format(calendar.dateFormatStyle));
+    }
+    this.calendarToday = obj;
+}
+
+//å¹´ä»½ä¸‹æ‹‰æ¡†ç»‘å®šæ•°æ®
+Calendar.prototype.bindYear = function() {
+    var cy = this.calendarYear;//2006-12-01 ç”±å¯’ç¾½æ«ä¿®æ”¹
+    cy.length = 0;
+    for (var i = this.beginYear; i <= this.endYear; i++){
+        cy.options[cy.length] = new Option(i + Calendar.language["year"][this.lang], i);
+    }
+}
+
+//æœˆä»½ä¸‹æ‹‰æ¡†ç»‘å®šæ•°æ®
+Calendar.prototype.bindMonth = function() {
+    var cm = this.calendarMonth;//2006-12-01 ç”±å¯’ç¾½æ«ä¿®æ”¹
+    cm.length = 0;
+    for (var i = 0; i < 12; i++){
+        cm.options[cm.length] = new Option(Calendar.language["months"][this.lang][i], i);
+    }
+}
+
+//å°æ—¶ä¸‹æ‹‰æ¡†ç»‘å®šæ•°æ®
+Calendar.prototype.bindHour = function() {
+    var ch = this.calendarHour;
+    if(ch.length > 0){return;}//2009-03-03 ä¸éœ€è¦é‡æ–°ç»‘å®šï¼Œæé«˜æ€§èƒ½
+    //ch.length = 0;
+    var h;
+    for (var i = 0; i < 24; i++){
+        h = ("00" + i +"").substr(("" + i).length);
+        ch.options[ch.length] = new Option(h, h);
+    }
+}
+
+//åˆ†é’Ÿä¸‹æ‹‰æ¡†ç»‘å®šæ•°æ®
+Calendar.prototype.bindMinute = function() {
+    var cM = this.calendarMinute;
+    if(cM.length > 0){return;}//2009-03-03 ä¸éœ€è¦é‡æ–°ç»‘å®šï¼Œæé«˜æ€§èƒ½
+    //cM.length = 0;
+    var M;
+    for (var i = 0; i < 60; i++){
+        M = ("00" + i +"").substr(("" + i).length);
+        cM.options[cM.length] = new Option(M, M);
+    }
+}
+
+//ç§’é’Ÿä¸‹æ‹‰æ¡†ç»‘å®šæ•°æ®
+Calendar.prototype.bindSecond = function() {
+    var cs = this.calendarSecond;
+    if(cs.length > 0){return;}//2009-03-03 ä¸éœ€è¦é‡æ–°ç»‘å®šï¼Œæé«˜æ€§èƒ½
+    //cs.length = 0;
+    var s;
+    for (var i = 0; i < 60; i++){
+        s = ("00" + i +"").substr(("" + i).length);
+        cs.options[cs.length] = new Option(s, s);
+    }
+}
+
+//å‘å‰ä¸€æœˆ
+Calendar.prototype.goPrevMonth = function(e){
+    if (this.year == this.beginYear && this.month == 0){return;}
+    this.month--;
+    if (this.month == -1) {
+        this.year--;
+        this.month = 11;
+    }
+    this.date = new Date(this.year, this.month, 1);
+    this.changeSelect();
+    this.bindData();
+}
+
+//å‘åä¸€æœˆ
+Calendar.prototype.goNextMonth = function(e){
+    if (this.year == this.endYear && this.month == 11){return;}
+    this.month++;
+    if (this.month == 12) {
+        this.year++;
+        this.month = 0;
+    }
+    this.date = new Date(this.year, this.month, 1);
+    this.changeSelect();
+    this.bindData();
+}
+
+//æ”¹å˜SELECTé€‰ä¸­çŠ¶æ€
+Calendar.prototype.changeSelect = function() {
+    var cy = this.calendarYear;//2006-12-01 ç”±å¯’ç¾½æ«ä¿®æ”¹
+    var cm = this.calendarMonth;
+    var ch = this.calendarHour;
+    var cM = this.calendarMinute;
+    var cs = this.calendarSecond;
+//2006-12-30 ç”±æ°‘å·¥.ç –å®¶ä¿®æ”¹ï¼Œå‡å°‘è¿ç®—æ¬¡æ•°
+    cy[this.date.getFullYear()-this.beginYear].selected = true;
+    cm[this.date.getMonth()].selected =true;
+
+//2009-03-03 æ·»åŠ ï¼Œåˆå§‹åŒ–æ—¶é—´çš„å€¼
+    ch[this.hour].selected =true;
+    cM[this.minute].selected =true;
+    cs[this.second].selected =true;
+}
+
+//æ›´æ–°å¹´ã€æœˆ
+Calendar.prototype.update = function (e){
+    this.year  = e.calendarYear.options[e.calendarYear.selectedIndex].value;//2006-12-01 ç”±å¯’ç¾½æ«ä¿®æ”¹
+    this.month = e.calendarMonth.options[e.calendarMonth.selectedIndex].value;
+    this.date = new Date(this.year, this.month, 1);
+    //this.changeSelect();
+    this.bindData();
+}
+
+//ç»‘å®šæ•°æ®åˆ°æœˆè§†å›¾
+Calendar.prototype.bindData = function () {
+    var calendar = this;
+    if(calendar.DateMode >= pickMode["month"]){return;}//2008-01-29
+// var dateArray = this.getMonthViewArray(this.date.getYear(), this.date.getMonth());
+    //2006-12-30 ç”±æ°‘å·¥.ç –å®¶ä¿®æ”¹ åœ¨Firefox ä¸‹å¹´ä»½é”™è¯¯
+    var dateArray = this.getMonthViewArray(this.date.getFullYear(), this.date.getMonth());
+    var tds = this.getElementById("calendarTable").getElementsByTagName("td");
+    for(var i = 0; i < tds.length; i++) {
+        tds[i].style.backgroundColor = calendar.colors["td_bg_out"];
+        tds[i].onclick = function () {return;}
+        tds[i].onmouseover = function () {return;}
+        tds[i].onmouseout = function () {return;}
+        if (i > dateArray.length - 1) break;
+        tds[i].innerHTML = dateArray[i];
+        if (dateArray[i] != " "){
+            tds[i].bgColorTxt = "td_bg_out"; //2009-03-03 ä¿å­˜èƒŒæ™¯è‰²çš„class
+            var cur = new Date();
+            tds[i].isToday = false;
+            if (cur.getFullYear() == calendar.date.getFullYear() && cur.getMonth() == calendar.date.getMonth() && cur.getDate() == dateArray[i]) {
+                //æ˜¯ä»Šå¤©çš„å•å…ƒæ ¼
+                tds[i].style.backgroundColor = calendar.colors["cur_bg"];
+                tds[i].bgColorTxt = "cur_bg";
+                tds[i].isToday = true;
+            }
+            if(calendar.dateControl != null )
+            {
+                cur = calendar.dateControl.value.toDate(calendar.dateFormatStyle);
+                if (cur.getFullYear() == calendar.date.getFullYear() && cur.getMonth() == calendar.date.getMonth()&& cur.getDate() == dateArray[i]) {
+                    //æ˜¯å·²è¢«é€‰ä¸­çš„å•å…ƒæ ¼
+                    calendar.selectedDayTD = tds[i];
+                    tds[i].style.backgroundColor = calendar.colors["sel_bg"];
+                    tds[i].bgColorTxt = "sel_bg";
+                }
+            }
+            tds[i].onclick = function () {
+                if(calendar.DateMode == pickMode["day"]) //2009-03-03 å½“é€‰æ‹©æ—¥æœŸæ—¶ï¼Œç‚¹å‡»æ ¼å­å³è¿”å›å€¼
+                {
+                    calendar.ReturnDate(new Date(calendar.date.getFullYear(),
+                        calendar.date.getMonth(),
+                        this.innerHTML).format(calendar.dateFormatStyle));
+                }
+                else
+                {
+                    if(calendar.selectedDayTD != null) //2009-03-03 æ¸…é™¤å·²é€‰ä¸­çš„èƒŒæ™¯è‰²
+                    {
+                        calendar.selectedDayTD.style.backgroundColor =(calendar.selectedDayTD.isToday)? calendar.colors["cur_bg"] : calendar.colors["td_bg_out"];
+                    }
+                    this.style.backgroundColor = calendar.colors["sel_bg"];
+                    calendar.day = this.innerHTML;
+                    calendar.selectedDayTD = this; //2009-03-03 è®°å½•å·²é€‰ä¸­çš„æ—¥å­
+                }
+            }
+            tds[i].style.cursor ="pointer"; //2007-08-06 ç”±å¯’ç¾½æ«æ·»åŠ ï¼Œé¼ æ ‡å˜æˆæ‰‹æŒ‡çŠ¶
+            tds[i].onmouseover = function () {
+                this.style.backgroundColor = calendar.colors["td_bg_over"];
+            }
+            tds[i].onmouseout = function () {
+                if(calendar.selectedDayTD != this) {
+                    this.style.backgroundColor = calendar.colors[this.bgColorTxt];}
+            }
+            tds[i].onblur = function () {calendar.onblur();}
+        }
+    }
+}
+
+//æ ¹æ®å¹´ã€æœˆå¾—åˆ°æœˆè§†å›¾æ•°æ®(æ•°ç»„å½¢å¼)
+Calendar.prototype.getMonthViewArray = function (y, m) {
+    var mvArray = [];
+    var dayOfFirstDay = new Date(y, m, 1).getDay();
+    var daysOfMonth = new Date(y, m + 1, 0).getDate();
+    for (var i = 0; i < 42; i++) {
+        mvArray[i] = " ";
+    }
+    for (var i = 0; i < daysOfMonth; i++){
+        mvArray[i + dayOfFirstDay] = i + 1;
+    }
+    return mvArray;
+}
+
+//æ‰©å±• document.getElementById(id) å¤šæµè§ˆå™¨å…¼å®¹æ€§ from meizz tree source
+Calendar.prototype.getElementById = function(id){
+    if (typeof(id) != "string" || id == "") return null;
+    if (document.getElementById) return document.getElementById(id);
+    if (document.all) return document.all(id);
+    try {return eval(id);} catch(e){ return null;}
+}
+
+//æ‰©å±• object.getElementsByTagName(tagName)
+Calendar.prototype.getElementsByTagName = function(object, tagName){
+    if (document.getElementsByTagName) return document.getElementsByTagName(tagName);
+    if (document.all) return document.all.tags(tagName);
+}
+
+//å–å¾—HTMLæ§ä»¶ç»å¯¹ä½ç½®
+Calendar.prototype.getAbsPoint = function (e){
+    var x = e.offsetLeft;
+    var y = e.offsetTop;
+    while(e = e.offsetParent){
+        x += e.offsetLeft;
+        y += e.offsetTop;
+    }
+    return {"x": x, "y": y};
+}
+
+//æ˜¾ç¤ºæ—¥å†
+Calendar.prototype.show = function (dateObj, popControl) {
+    if (dateObj == null){
+        throw new Error("arguments[0] is necessary")
+    }
+    this.dateControl = dateObj;
+    var now =  new Date();
+    this.date = (dateObj.value.length > 0) ? new Date(dateObj.value.toDate(this.dateFormatStyle)) : now.format(this.dateFormatStyle).toDate(this.dateFormatStyle) ;//2008-01-29 å¯’ç¾½æ«æ·»åŠ  â†’ è‹¥ä¸ºç©ºåˆ™æ ¹æ®dateFormatStyleåˆå§‹åŒ–æ—¥æœŸ
+
+    if(this.panel.innerHTML==""||cal.dateFormatStyleOld != cal.dateFormatStyle)//2008-01-29 æŠŠæ„é€ è¡¨æ ¼æ”¾åœ¨æ­¤å¤„ï¼Œ2009-03-03 è‹¥è¯·ç¤ºçš„æ ·å¼æ”¹å˜ï¼Œåˆ™é‡æ–°åˆå§‹åŒ–
+    {
+        this.draw();
+        this.bindYear();
+        this.bindMonth();
+        this.bindHour();
+        this.bindMinute();
+        this.bindSecond();
+    }
+    this.year = this.date.getFullYear();
+    this.month = this.date.getMonth();
+    this.day = this.date.getDate();
+    this.hour = this.date.getHours();
+    this.minute = this.date.getMinutes();
+    this.second = this.date.getSeconds();
+    this.changeSelect();
+    this.bindData();
+
+    if (popControl == null){
+        popControl = dateObj;
+    }
+    var xy = this.getAbsPoint(popControl);
+    //this.panel.style.left = xy.x + "px";
+    //this.panel.style.top = (xy.y + dateObj.offsetHeight) + "px";
+    this.panel.style.left = (xy.x + leftX)+ "px"; //ç”±å¯’ç¾½æ« 2007-02-11 ä¿®æ”¹ â†’ åŠ å…¥è‡ªå®šä¹‰åç§»é‡
+    this.panel.style.top = (xy.y + topY + dateObj.offsetHeight) + "px";
+
+    //ç”±å¯’ç¾½æ« 2006-06-25 ä¿®æ”¹ â†’ æŠŠ visibility å˜ä¸º displayï¼Œå¹¶æ·»åŠ å¤±å»ç„¦ç‚¹çš„äº‹ä»¶  //this.setDisplayStyle("select", "hidden");
+    //this.panel.style.visibility = "visible";
+    //this.container.style.visibility = "visible";
+    this.panel.style.display = "";
+    this.container.style.display = "";
+
+    if( !this.dateControl.isTransEvent)
+    {
+        this.dateControl.isTransEvent = true;
+        /* å·²å†™åœ¨è¿”å›å€¼çš„æ—¶å€™  ReturnDate å‡½æ•°ä¸­ï¼Œå»é™¤éªŒè¯äº‹ä»¶çš„å‡½æ•°
+        this.dateControl.changeEvent = this.dateControl.onchange;//å°† onchange è½¬æˆå…¶å®ƒå‡½æ•°ï¼Œä»¥å…è§¦å‘éªŒè¯äº‹ä»¶
+        this.dateControl.onchange = function()
+        {if(typeof(this.changeEvent) =='function'){this.changeEvent();}}*/
+        if(this.dateControl.onblur != null){
+            this.dateControl.blurEvent = this.dateControl.onblur;}//2007-09-14 ä¿å­˜ä¸»æ–‡æœ¬æ¡†çš„ onblur ï¼Œä½¿å…¶åŸæœ¬çš„äº‹ä»¶ä¸è¢«è¦†ç›–
+        this.dateControl.onblur = function()
+        {calendar.onblur();if(typeof(this.blurEvent) =='function'){this.blurEvent();}
+        }
+    }
+
+    this.container.onmouseover = function(){isFocus=true;}
+    this.container.onmouseout = function(){isFocus=false;}
+}
+
+//éšè—æ—¥å†
+Calendar.prototype.hide = function() {
+    //this.setDisplayStyle("select", "visible");
+    //this.panel.style.visibility = "hidden";
+    //this.container.style.visibility = "hidden";
+    this.panel.style.display = "none";
+    this.container.style.display = "none";
+    isFocus=false;
+}
+
+//ç„¦ç‚¹è½¬ç§»æ—¶éšè—æ—¥å† â†’ ç”±å¯’ç¾½æ« 2006-06-25 æ·»åŠ 
+Calendar.prototype.onblur = function() {
+    if(!isFocus){this.hide();}
+}
+
+//ä»¥ä¸‹ç”±å¯’ç¾½æ« 2007-07-26 ä¿®æ”¹ â†’ ç¡®ä¿æ—¥å†å®¹å™¨èŠ‚ç‚¹åœ¨ body æœ€åï¼Œå¦åˆ™ FireFox ä¸­ä¸èƒ½å‡ºç°åœ¨æœ€ä¸Šæ–¹
+function InitContainerPanel() //åˆå§‹åŒ–å®¹å™¨
+{
+    var str = '<div id="calendarPanel" style="position: absolute;display: none;z-index:9999; background-color: #FFFFFF;border: 1px solid #CCCCCC;width:175px;font-size:12px;"></div>';
+    if(document.all)
+    {
+        str += '<iframe style="position:absolute;z-index:2000;width:expression(this.previousSibling.offsetWidth);';
+        str += 'height:expression(this.previousSibling.offsetHeight);';
+        str += 'left:expression(this.previousSibling.offsetLeft);top:expression(this.previousSibling.offsetTop);';
+        str += 'display:expression(this.previousSibling.style.display);" scrolling="no" frameborder="no"></iframe>';
+    }
+    var div = document.createElement("div");
+    div.innerHTML = str;
+    div.id = "ContainerPanel";
+    div.style.display ="none";
+    document.body.appendChild(div);
+}//è°ƒç”¨calendar.show(dateControl, popControl);
 //-->
