@@ -1,0 +1,3 @@
+<div id="button_container" style="float: left;"> 
+        <!-- buttons come here --> 
+        <a href="javascript:setMode('pointer')"><img src="images/pointer.png" alt="Pointer" id="imgpointer"></a> <a href="javascript:setMode('rect')"><img src="images/rect.png" alt="rect" id="imgrect"></a> <a href="javascript:setMode('circle')"><img src="images/circle.png" alt="Circle" id="imgcircle"></a> <a href="javascript:setMode('poly')"><img src="images/poly.png" alt="poly" id="imgpoly"></a> <img src="images/delete.gif" id="imgmapDeleteArea" onClick="myimgmap.removeArea(myimgmap.currentid)" title="É¾³ýÈÈÇø" style="margin: 0 2px; cursor: pointer;"/> </div>

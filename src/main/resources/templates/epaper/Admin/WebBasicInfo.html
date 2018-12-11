@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<meta charset="utf-8">
+<link href="/epaper/Images/skin.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head th:include="include :: header">
+</head>
+<body>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td width="17" height="29" valign="top" background="/epaper/Images/mail_leftbg.gif"><img src="/epaper/Images/left-top-right.gif" width="17" height="29" /></td>
+        <td height="29" valign="top" background="/epaper/Images/content-bg.gif"><div class="titlebt">基本设置</div></td>
+        <td width="22" valign="top" background="/epaper/Images/mail_rightbg.gif"><img src="/epaper/Images/nav-right-bg.gif" width="16" height="29" /></td>
+    </tr>
+    <tr>
+        <td height="257" valign="middle" background="/epaper/Images/mail_leftbg.gif">&nbsp;</td>
+        <td valign="top" bgcolor="#F7F8F9">
+            <form id="myform">
+                <table width="100%"  border="1" cellspacing="0" cellpadding="0" class="colorTest">
+                    <tr hidden="hidden">
+                        <td width="29%" align="right">id：</td>
+                        <td width="71%"><input name="id" type="text" class="input_text" size="40" th:value="${basicInfo.id}"></td>
+                    </tr>
+                    <tr>
+                        <td width="29%" align="right">网站名称：</td>
+                        <td width="71%" align="left"><input maxlength="100" name="websitename" type="text" class="input_text" size="40" th:value="${basicInfo.websitename}"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">网站网址：</td>
+                        <td align="left"><input maxlength="100" name="websiteurl" type="text" class="input_text" size="40" th:value="${basicInfo.websiteurl}"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">备案证号：</td>
+                        <td align="left"><input maxlength="50" name="websitetcp" type="text" class="input_text" size="40" th:value="${basicInfo.websitetcp}"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">评论开关：</td>
+                        <td align="left"><input name="message" type="radio" value="1" th:field="*{basicInfo.message}">
+                            评论开
+                            <input name="message" type="radio" value="0" th:field="*{basicInfo.message}">
+                            评论关
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">统计代码：</td>
+                        <td align="left"><textarea maxlength="250" name="webtongji" cols="60" rows="3" th:text="${basicInfo.webtongji}"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td align="right">关 键 字：</td>
+                        <td align="left"><textarea maxlength="250" name="websitekeyword" cols="60" rows="3" th:text="${basicInfo.websitekeyword}"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td align="right">网站介绍：</td>
+                        <td align="left"><textarea maxlength="250" name="websiteintr" cols="60" rows="5"  th:text="${basicInfo.websiteintr}"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td align="right">版权信息：</td>
+                        <td align="left"><textarea maxlength="250" name="websitecopyinfo" cols="60" rows="5" th:text="${basicInfo.websitecopyinfo}"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td align="right">&nbsp;</td>
+                        <td align="left"><input type="submit" name="submit" value="　提　交　" onclick="commit()">
+                            <font color="#FF0000">请勿出现单引号，否则引起错误！</font>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </td>
+        <td background="/epaper/Images/mail_rightbg.gif">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="middle" background="/epaper/Images/mail_leftbg.gif"><img src="/epaper/Images/buttom_left2.gif" width="17" height="17" /></td>
+        <td height="17" valign="top" background="/epaper/Images/buttom_bgs.gif"><img src="/epaper/Images/buttom_bgs.gif" width="17" height="17" /></td>
+        <td background="/epaper/Images/mail_rightbg.gif"><img src="/epaper/Images/buttom_right2.gif" width="16" height="17" /></td>
+    </tr>
+</table>
+<script type="text/javascript">
+    function commit() {
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url : "/epaper/webBasicInfo/update",
+            data : $('#myform').serialize(),// 你的formid
+            async : false,
+            error : function(request) {
+                alert("Connection error");
+            },
+            success : function(data) {
+                if (data.code == 0) {
+                    parent.layer.msg(data.msg);
+                    // parent.reLoad();
+                    // var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                    // parent.layer.close(index);
+
+                } else {
+                    parent.layer.msg(data.msg);
+                }
+
+            }
+        });
+    }
+</script>
+<div th:include="include::footer"></div>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.epaper.dao.InfoDao">
+
+	<select id="get" resultType="com.bootdo.epaper.domain.InfoDO">
+		select `ID`,`WebSiteName`,`WebSiteUrl`,`WebSiteTCP`,`WebTongJi`,`WebSiteKeyword`,`WebSiteIntr`,`WebSiteCopyInfo`,`Message`,`Powered` from epaper_info where ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.epaper.domain.InfoDO">
+		select `ID`,`WebSiteName`,`WebSiteUrl`,`WebSiteTCP`,`WebTongJi`,`WebSiteKeyword`,`WebSiteIntr`,`WebSiteCopyInfo`,`Message`,`Powered` from epaper_info
+        <where>  
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="websitename != null and websitename != ''"> and WebSiteName = #{websitename} </if>
+		  		  <if test="websiteurl != null and websiteurl != ''"> and WebSiteUrl = #{websiteurl} </if>
+		  		  <if test="websitetcp != null and websitetcp != ''"> and WebSiteTCP = #{websitetcp} </if>
+		  		  <if test="webtongji != null and webtongji != ''"> and WebTongJi = #{webtongji} </if>
+		  		  <if test="websitekeyword != null and websitekeyword != ''"> and WebSiteKeyword = #{websitekeyword} </if>
+		  		  <if test="websiteintr != null and websiteintr != ''"> and WebSiteIntr = #{websiteintr} </if>
+		  		  <if test="websitecopyinfo != null and websitecopyinfo != ''"> and WebSiteCopyInfo = #{websitecopyinfo} </if>
+		  		  <if test="message != null and message != ''"> and Message = #{message} </if>
+		  		  <if test="powered != null and powered != ''"> and Powered = #{powered} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from epaper_info
+		 <where>  
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="websitename != null and websitename != ''"> and WebSiteName = #{websitename} </if>
+		  		  <if test="websiteurl != null and websiteurl != ''"> and WebSiteUrl = #{websiteurl} </if>
+		  		  <if test="websitetcp != null and websitetcp != ''"> and WebSiteTCP = #{websitetcp} </if>
+		  		  <if test="webtongji != null and webtongji != ''"> and WebTongJi = #{webtongji} </if>
+		  		  <if test="websitekeyword != null and websitekeyword != ''"> and WebSiteKeyword = #{websitekeyword} </if>
+		  		  <if test="websiteintr != null and websiteintr != ''"> and WebSiteIntr = #{websiteintr} </if>
+		  		  <if test="websitecopyinfo != null and websitecopyinfo != ''"> and WebSiteCopyInfo = #{websitecopyinfo} </if>
+		  		  <if test="message != null and message != ''"> and Message = #{message} </if>
+		  		  <if test="powered != null and powered != ''"> and Powered = #{powered} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.epaper.domain.InfoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into epaper_info
+		(
+			`WebSiteName`, 
+			`WebSiteUrl`, 
+			`WebSiteTCP`, 
+			`WebTongJi`, 
+			`WebSiteKeyword`, 
+			`WebSiteIntr`, 
+			`WebSiteCopyInfo`, 
+			`Message`, 
+			`Powered`
+		)
+		values
+		(
+			#{websitename}, 
+			#{websiteurl}, 
+			#{websitetcp}, 
+			#{webtongji}, 
+			#{websitekeyword}, 
+			#{websiteintr}, 
+			#{websitecopyinfo}, 
+			#{message}, 
+			#{powered}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.epaper.domain.InfoDO">
+		update epaper_info 
+		<set>
+			<if test="websitename != null">`WebSiteName` = #{websitename}, </if>
+			<if test="websiteurl != null">`WebSiteUrl` = #{websiteurl}, </if>
+			<if test="websitetcp != null">`WebSiteTCP` = #{websitetcp}, </if>
+			<if test="webtongji != null">`WebTongJi` = #{webtongji}, </if>
+			<if test="websitekeyword != null">`WebSiteKeyword` = #{websitekeyword}, </if>
+			<if test="websiteintr != null">`WebSiteIntr` = #{websiteintr}, </if>
+			<if test="websitecopyinfo != null">`WebSiteCopyInfo` = #{websitecopyinfo}, </if>
+			<if test="message != null">`Message` = #{message}, </if>
+			<if test="powered != null">`Powered` = #{powered}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from epaper_info where ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from epaper_info where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

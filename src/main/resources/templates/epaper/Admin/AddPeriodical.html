@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<meta charset="utf-8">
+<link href="/epaper/Images/skin.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="/epaper/Js/WebCalendar.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head th:include="include :: header">
+</head>
+<body>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="17" height="29" valign="top" background="Images/mail_leftbg.gif"><img src="Images/left-top-right.gif" width="17" height="29" /></td>
+    <td height="29" valign="top" background="Images/content-bg.gif"><div class="titlebt">添加期刊</div></td>
+    <td width="22" valign="top" background="Images/mail_rightbg.gif"><img src="Images/nav-right-bg.gif" width="16" height="29" /></td>
+  </tr>
+  <tr>
+    <td height="83" valign="middle" background="Images/mail_leftbg.gif">&nbsp;</td>
+    <td valign="top" bgcolor="#F7F8F9">
+      <form name="AddPeriodical" method="post" action="AddPeriodical.php" onSubmit="return CheckAddPeriodical()">
+        <table width="100%"  border="1" cellspacing="0" cellpadding="0" class="colorTest">
+          <td width="32%" align="right"> <strong>报纸期号：</strong></td>
+          <td width="68%"> <input name="PublishID" type="text" size="20" maxlength="30" value="<? gettotalsums(); ?>">（注：您已经添加过<font color="#FF0000"><b>
+            <? gettotalsum(); ?> </b></font>期报纸）
+          </td>
+          </tr>
+          <tr class="tdbg">
+            <td height="22" align="right"><strong>发行时间：</strong></td>
+            <td > <label>
+              <input name="PublishDate" type="text" size="20" maxlength="20" onClick="SelectDate(this,'yyyy-MM-dd')" readonly="true" /></label>（注：点击左边文本框选择日期）
+            </td>
+          </tr>
+          <tr class="tdbg">
+            <td height="27" align="center">&nbsp; </td>
+            <td height="27" align="left" >
+              <input name="submit" type="submit" value=" 添 加 ">
+            </td>
+          </tr>
+        </table>
+      </form></td>
+    <td background="Images/mail_rightbg.gif">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="middle" background="Images/mail_leftbg.gif"><img src="Images/buttom_left2.gif" width="17" height="17" /></td>
+    <td height="17" valign="top" background="Images/buttom_bgs.gif"><img src="Images/buttom_bgs.gif" width="17" height="17" /></td>
+    <td background="Images/mail_rightbg.gif"><img src="Images/buttom_right2.gif" width="16" height="17" /></td>
+  </tr>
+</table>
+<script language = "JavaScript">
+    function CheckAddPeriodical()
+    {
+
+        if (document.AddPeriodical.PublishID.value.length == 0) {
+            alert("报纸期刊号不能为空！");
+            document.AddPeriodical.PublishID.focus();
+            return false;
+        }
+        if (document.AddPeriodical.PublishDate.value.length == 0) {
+            alert("报纸期刊日期不能为空！");
+            document.AddPeriodical.PublishDate.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+<div th:include="include::footer"></div>
+</body>
+
+</html>
