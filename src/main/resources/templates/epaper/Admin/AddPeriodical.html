@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
-<meta charset="utf-8">
 <link href="/epaper/Images/skin.css" rel="stylesheet" type="text/css" />
-<script language="javascript" src="/epaper/Js/WebCalendar.js"></script>
+<script language="javascript" src="/epaper/Js/WebCalendar.js" charset="GBK"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <head th:include="include :: header">
 </head>
@@ -16,7 +15,7 @@
   <tr>
     <td height="83" valign="middle" background="/epaper/Images/mail_leftbg.gif">&nbsp;</td>
     <td valign="top" bgcolor="#F7F8F9">
-      <form name="AddPeriodical" method="post" action="AddPeriodical.php" onSubmit="return CheckAddPeriodical()">
+      <form name="AddPeriodical">
         <table width="100%"  border="1" cellspacing="0" cellpadding="0" class="colorTest">
           <td width="30%" align="right"> <strong>报纸期号：</strong></td>
           <td width="70%" align="left"> <input name="PublishID" type="text" size="20" maxlength="30">（注：您已经添加过<font color="#FF0000"><b>
@@ -45,7 +44,7 @@
     <td background="/epaper/Images/mail_rightbg.gif"><img src="/epaper/Images/buttom_right2.gif" width="16" height="17" /></td>
   </tr>
 </table>
-<script language = "JavaScript">
+<script type="text/javascript">
     function CheckAddPeriodical()
     {
 
