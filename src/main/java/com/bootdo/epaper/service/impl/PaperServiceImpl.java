@@ -51,5 +51,9 @@ public class PaperServiceImpl implements PaperService {
 	public int batchRemove(Long[] ids){
 		return paperDao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public int getLastPublishID() {
+		return paperDao.getLastPublishID();
+	}
 }

@@ -29,4 +29,6 @@ public interface PaperDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	int getLastPublishID();
 }

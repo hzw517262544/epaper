@@ -1,5 +1,6 @@
 package com.bootdo.epaper.controller;
 
+import com.bootdo.common.utils.DateUtils;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,8 +31,11 @@ public class PaperController {
 	
 	@GetMapping()
 //	@RequiresPermissions("epaper:paper:paper")
-	String Paper(){
-	    return "epaper/Admin/AddPeriodical";
+	String Paper(Model model){
+	    //期数默认
+		int publishid = paperService.getLastPublishID()+1;
+		model.addAttribute("publishid",publishid);
+		return "epaper/Admin/AddPeriodical";
 	}
 	
 	@ResponseBody
@@ -66,8 +71,16 @@ public class PaperController {
 	@PostMapping("/save")
 //	@RequiresPermissions("epaper:paper:add")
 	public R save( PaperDO paper){
+		//校验该日期的报纸是否已添加
+		Map<String,Object> parMap = new HashMap<String,Object>();
+		String publishdate = DateUtils.format(paper.getPublishdate(),"yyyy-MM-dd");
+		parMap.put("publishdate",publishdate);
+		int count = paperService.count(parMap);
+		if(count>0){
+			return R.error().put("msg","已添加"+publishdate+"的报纸，请勿重复添加！");
+		}
 		if(paperService.save(paper)>0){
-			return R.ok();
+			return R.ok().put("msg","期刊添加成功！");
 		}
 		return R.error();
 	}

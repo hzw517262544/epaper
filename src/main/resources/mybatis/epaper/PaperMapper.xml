@@ -71,4 +71,8 @@
 		</foreach>
 	</delete>
 
+	<select id="getLastPublishID" resultType="int">
+		select IFNULL(MAX(PublishID),0) from epaper_paper where 1=1
+	</select>
+
 </mapper>

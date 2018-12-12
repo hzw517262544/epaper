@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
 <link href="/epaper/Images/skin.css" rel="stylesheet" type="text/css" />
-<script language="javascript" src="/epaper/Js/WebCalendar.js" charset="GBK"></script>
+<script language="javascript" src="/epaper/Js/WebCalendar.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <head th:include="include :: header">
 </head>
@@ -15,22 +15,23 @@
   <tr>
     <td height="83" valign="middle" background="/epaper/Images/mail_leftbg.gif">&nbsp;</td>
     <td valign="top" bgcolor="#F7F8F9">
-      <form name="AddPeriodical">
+      <form id="AddPeriodical">
         <table width="100%"  border="1" cellspacing="0" cellpadding="0" class="colorTest">
           <td width="30%" align="right"> <strong>报纸期号：</strong></td>
-          <td width="70%" align="left"> <input name="publishid" id="publishid" type="text" size="20" maxlength="30" readonly="readonly"> </b></font>期报纸）
+          <td width="70%" align="left">
+            <input name="publishid" id="publishid" type="text" size="20" maxlength="30" th:value="${publishid}" readonly="true">
           </td>
           </tr>
           <tr class="tdbg">
             <td height="22" align="right"><strong>发行时间：</strong></td>
             <td  align="left"> <label>
-              <input name="PublishDate" type="text" size="20" maxlength="20" onClick="SelectDate(this,'yyyy-MM-dd')" readonly="true" /></label>（注：点击左边文本框选择日期）
+              <input name="publishdate" id="publishdate" type="text" size="20" maxlength="20" onClick="SelectDate(this,'yyyy-MM-dd')" readonly="true" /></label>（注：点击左边文本框选择日期）
             </td>
           </tr>
           <tr class="tdbg">
             <td height="27" align="center">&nbsp; </td>
             <td height="27" align="left" >
-              <input name="submit" type="submit" value=" 添 加 ">
+              <input name="submit" type="submit" value=" 添 加 " onclick="commit()">
             </td>
           </tr>
         </table>
@@ -44,20 +45,39 @@
   </tr>
 </table>
 <script type="text/javascript">
-    function CheckAddPeriodical()
-    {
+    function commit() {
+        if ($("#publishid").val() =="") {
+            parent.layer.msg("报纸期刊号不能为空！");
+            $("#publishid").focus();
+            return false;
+        }
+        if ($("#publishdate").val() =="") {
+            parent.layer.msg("报纸期刊日期不能为空！");
+            $("#publishdate").focus();
+            return false;
+        }
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url : "/epaper/paper/save",
+            data : $('#AddPeriodical').serialize(),// 你的formid
+            async : false,
+            error : function(request) {
+                alert("Connection error");
+            },
+            success : function(data) {
+                if (data.code == 0) {
+                    parent.layer.msg(data.msg);
+                    // parent.reLoad();
+                    // var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                    // parent.layer.close(index);
 
-        if (document.AddPeriodical.PublishID.value.length == 0) {
-            alert("报纸期刊号不能为空！");
-            document.AddPeriodical.PublishID.focus();
-            return false;
-        }
-        if (document.AddPeriodical.PublishDate.value.length == 0) {
-            alert("报纸期刊日期不能为空！");
-            document.AddPeriodical.PublishDate.focus();
-            return false;
-        }
-        return true;
+                } else {
+                    parent.layer.msg(data.msg);
+                }
+
+            }
+        });
     }
 </script>
 <div th:include="include::footer"></div>
