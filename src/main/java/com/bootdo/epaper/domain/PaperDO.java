@@ -22,6 +22,10 @@ public class PaperDO implements Serializable {
 	//
 	private Long id;
 
+	private Integer parentid;
+
+	private String verorder;
+
 	/**
 	 * 设置：
 	 */
@@ -57,5 +61,21 @@ public class PaperDO implements Serializable {
 	 */
 	public Long getId() {
 		return id;
+	}
+
+	public Integer getParentid() {
+		return parentid;
+	}
+
+	public void setParentid(Integer parentid) {
+		this.parentid = parentid;
+	}
+
+	public String getVerorder() {
+		return verorder;
+	}
+
+	public void setVerorder(String verorder) {
+		this.verorder = verorder;
 	}
 }

@@ -8,7 +8,20 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.epaper.domain.PaperDO">
-		select `PublishID`,`PublishDate`,`id` from epaper_paper
+		SELECT
+		T.id,T.PublishID,T.PublishDate,T.parentid,T.VerOrder
+		FROM
+		(
+		SELECT
+		t1.id,t1.PublishID,t1.PublishDate,0 AS parentid,'' AS VerOrder
+		FROM
+		epaper_paper t1
+		UNION ALL
+		SELECT
+		t2.id,'' AS PublishID,t2.PublishDate,t2.PublishID AS parentid,t2.VerOrder
+		FROM
+		epaper_rect t2
+		) T
         <where>  
 		  		  <if test="publishid != null and publishid != ''"> and PublishID = #{publishid} </if>
 		  		  <if test="publishdate != null and publishdate != ''"> and PublishDate = #{publishdate} </if>
@@ -19,7 +32,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by id desc
+                order by T.publishid desc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">

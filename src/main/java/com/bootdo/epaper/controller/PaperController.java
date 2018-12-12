@@ -37,6 +37,15 @@ public class PaperController {
 		model.addAttribute("publishid",publishid);
 		return "epaper/Admin/AddPeriodical";
 	}
+
+	@GetMapping("/hotManage")
+//	@RequiresPermissions("epaper:paper:hotmanage")
+	String hotManage(Model model){
+		//期数默认
+		int publishid = paperService.getLastPublishID()+1;
+		model.addAttribute("publishid",publishid);
+		return "epaper/Admin/HotManage";
+	}
 	
 	@ResponseBody
 	@GetMapping("/list")
