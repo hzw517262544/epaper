@@ -18,7 +18,7 @@
 		epaper_paper t1
 		UNION ALL
 		SELECT
-		t2.id,'' AS PublishID,t2.PublishDate,t2.PublishID AS parentid,t2.VerOrder
+		t2.id,0 AS PublishID,t2.PublishDate,t2.PublishID AS parentid,t2.VerOrder
 		FROM
 		epaper_rect t2
 		) T

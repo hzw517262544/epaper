@@ -18,7 +18,7 @@ function load() {
 					//	showToggle : true,
 					//	showColumns : true,
 						iconSize : 'outline',
-						toolbar : '#exampleToolbar',
+						// toolbar : '#exampleToolbar',
 						striped : true, // 设置为true会有隔行变色效果
 						dataType : "json", // 服务器返回的数据类型
 						pagination : true, // 设置为true会在底部显示分页条
@@ -56,6 +56,7 @@ function load() {
 								},{
                                 field : 'publishid',
                                 title : 'publishid',
+                                valign: 'center',
                                 visible:true
                             },
 																{
@@ -63,6 +64,7 @@ function load() {
 									title : '发行期刊',
 									width:500,
 									align : 'center',
+									valign: 'center',
 									formatter:function (value,row,index) {
 										return row.publishdate+"&nbsp;(第"+row.publishid+"期)";
                                     }
@@ -70,12 +72,14 @@ function load() {
 																{
 									field : 'publishdate', 
 									title : '' ,
+									valign: 'center',
 									visible:false
 								},
 																{
 									title : '操作选项',
 									field : 'id',
 									align : 'center',
+									valign: 'center',
 									formatter : function(value, row, index) {
 										var e = '<a href="#" mce_href="#" title="添加所属期刊版面" onclick="AddPaper(\''
 												+ row.id
