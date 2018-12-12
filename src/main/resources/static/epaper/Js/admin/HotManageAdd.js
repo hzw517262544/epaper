@@ -1,5 +1,8 @@
 $().ready(function() {
 	validateRule();
+    laydate({
+        elem : '#publishdate'
+    });
 });
 
 $.validator.setDefaults({

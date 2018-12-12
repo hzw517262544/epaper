@@ -61,8 +61,11 @@ public class PaperController {
 	
 	@GetMapping("/add")
 //	@RequiresPermissions("epaper:paper:add")
-	String add(){
-	    return "epaper/paper/add";
+	String add(Model model){
+		//期数默认
+		int publishid = paperService.getLastPublishID()+1;
+		model.addAttribute("publishid",publishid);
+	    return "epaper/Admin/HotManage_Add";
 	}
 
 	@GetMapping("/edit/{id}")
