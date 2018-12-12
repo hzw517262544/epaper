@@ -54,10 +54,6 @@ function load() {
                             {
 									checkbox : true
 								},{
-                                field : 'parentid',
-                                title : 'parentid',
-                                visible:true
-                            },{
                                 field : 'publishid',
                                 title : 'publishid',
                                 visible:true
@@ -78,7 +74,7 @@ function load() {
 								},
 																{
 									title : '操作选项',
-									field : 'publishid',
+									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
 										var e = '<a href="#" mce_href="#" title="添加所属期刊版面" onclick="AddPaper(\''
