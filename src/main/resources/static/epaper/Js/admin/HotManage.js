@@ -47,9 +47,8 @@ function load() {
                     {
                         field: 'no',
                         title: '序号',
-                        sortable: true,
-                        align: "center",
-                        width: 40,
+                        align:'center',
+                        width: 50,
                         formatter: function (value, row, index) {
                             //获取每页显示的数量
                             var pageSize=$('#exampleTable').bootstrapTable('getOptions').pageSize;
@@ -58,8 +57,6 @@ function load() {
                             //返回序号，注意index是从0开始的，所以要加上1
                             return pageSize * (pageNumber - 1) + index + 1;
                         }
-                    },{
-                        checkbox : true
                     },
                     {
                         field : 'publishid',
@@ -126,7 +123,7 @@ function load() {
                                         + '\')">生成Html</a> ';
 
                                     html += "<tr  align='center'>"
-                                        + "<td width='620'>" + value.verorder+":"+value.banmian + "</td>"
+                                        + "<td width='550'>" + value.verorder+":"+value.banmian + "</td>"
                                         + "<td>" + e+"|"+d+"|"+f+"|"+g + "</td>"
                                         + "</tr>";
                                 });
