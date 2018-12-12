@@ -1,9 +1,8 @@
 $().ready(function() {
-	validateRule();
-	debugger;
     laydate({
         elem : '#publishdate'
     });
+	validateRule();
 });
 
 $.validator.setDefaults({
