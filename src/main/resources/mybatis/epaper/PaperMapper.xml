@@ -8,33 +8,20 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.epaper.domain.PaperDO">
-		SELECT
-		T.id,T.PublishID,T.PublishDate,T.parentid,T.VerOrder
-		FROM
-		(
-		SELECT
-		t1.id,t1.PublishID,t1.PublishDate,0 AS parentid,'' AS VerOrder
-		FROM
-		epaper_paper t1
-		UNION ALL
-		SELECT
-		t2.id,0 AS PublishID,t2.PublishDate,t2.PublishID AS parentid,t2.VerOrder
-		FROM
-		epaper_rect t2
-		) T
-        <where>  
-		  		  <if test="publishid != null and publishid != ''"> and PublishID = #{publishid} </if>
-		  		  <if test="publishdate != null and publishdate != ''"> and PublishDate = #{publishdate} </if>
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		</where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
+		select `PublishID`,`PublishDate`,`id` from epaper_paper
+		<where>
+			<if test="publishid != null and publishid != ''"> and PublishID = #{publishid} </if>
+			<if test="publishdate != null and publishdate != ''"> and PublishDate = #{publishdate} </if>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
 			<otherwise>
-                order by T.publishid desc
+				order by id desc
 			</otherwise>
-        </choose>
+		</choose>
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>

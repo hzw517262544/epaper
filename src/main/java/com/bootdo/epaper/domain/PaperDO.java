@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author hzw
  * @email hao17681124518@163.com
- * @date 2018-12-11 21:48:48
+ * @date 2018-12-12 19:45:57
  */
 public class PaperDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,10 +21,6 @@ public class PaperDO implements Serializable {
 	private Date publishdate;
 	//
 	private Long id;
-
-	private Integer parentid;
-
-	private String verorder;
 
 	/**
 	 * 设置：
@@ -61,21 +57,5 @@ public class PaperDO implements Serializable {
 	 */
 	public Long getId() {
 		return id;
-	}
-
-	public Integer getParentid() {
-		return parentid;
-	}
-
-	public void setParentid(Integer parentid) {
-		this.parentid = parentid;
-	}
-
-	public String getVerorder() {
-		return verorder;
-	}
-
-	public void setVerorder(String verorder) {
-		this.verorder = verorder;
 	}
 }
