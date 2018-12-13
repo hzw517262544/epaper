@@ -79,16 +79,16 @@ function load() {
                         field : 'id',
                         align : 'center',
                         formatter : function(value, row, index) {
-                            var e = '<a  href="#" title="添加所属期刊版面" onclick="edit(\''
+                            var e = '<a  href="#" title="添加所属期刊版面" onclick="AddPaper(\''
                                 + row.id
                                 + '\')">添加所属期刊版面</a> ';
-                            var d = '<a  href="#" title="修改" onclick="remove(\''
+                            var d = '<a  href="#" title="修改" onclick="ModifyNewsPaper(\''
                                 + row.id
                                 + '\')">修改</a> ';
-                            var f = '<a  href="#" title="删除" onclick="resetPwd(\''
+                            var f = '<a  href="#" title="删除" onclick="DelNewsPaper(\''
                                 + row.id
                                 + '\')">删除</a> ';
-                            var g = '<a  href="#" title="生成Html" onclick="resetPwd(\''
+                            var g = '<a  href="#" title="生成Html" onclick="HtmlSave(\''
                                 + row.id
                                 + '\')">生成Html</a> ';
                             return e+"|"+d+"|"+f+"|"+g;
@@ -157,7 +157,7 @@ function edit(id) {
         content : prefix + '/edit/' + id // iframe的url
     });
 }
-function remove(id) {
+function DelNewsPaper(id) {
     layer.confirm('确定要删除选中的记录？', {
         btn : [ '确定', '取消' ]
     }, function() {
