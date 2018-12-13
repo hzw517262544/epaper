@@ -5,7 +5,9 @@ import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
 import com.bootdo.epaper.domain.PaperDO;
+import com.bootdo.epaper.domain.RectDO;
 import com.bootdo.epaper.service.PaperService;
+import com.bootdo.epaper.service.RectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,8 @@ import java.util.Map;
 public class PaperController {
 	@Autowired
 	private PaperService paperService;
+	@Autowired
+	private RectService rectService;
 	
 	@GetMapping()
 //	@RequiresPermissions("epaper:paper:paper")
@@ -114,7 +118,10 @@ public class PaperController {
 	@ResponseBody
 //	@RequiresPermissions("epaper:paper:remove")
 	public R remove( Long id){
+		Integer publishid = paperService.get(id).getPublishid();
 		if(paperService.remove(id)>0){
+			//同时删除rect表数据
+			rectService.removeByPublisId(publishid);
 		return R.ok();
 		}
 		return R.error();
@@ -129,6 +136,14 @@ public class PaperController {
 	public R remove(@RequestParam("ids[]") Long[] ids){
 		paperService.batchRemove(ids);
 		return R.ok();
+	}
+	//添加/修改热图
+	@GetMapping("/modifyPaper/{id}")
+//	@RequiresPermissions("epaper:paper:edit")
+	String modifyPaper(@PathVariable("id") Integer id,Model model){
+		RectDO rectDO = rectService.get(id);
+		model.addAttribute("rect", rectDO);
+		return "epaper/Admin/ModifyPaper";
 	}
 	
 }

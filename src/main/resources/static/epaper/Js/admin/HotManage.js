@@ -109,17 +109,17 @@ function load() {
                             //遍历子表数据
                             $.each(data,
                                 function(n, value) {
-                                    var e = '<a  href="#" title="添加/修改热图" onclick="edit(\''
-                                        + row.id
+                                    var e = '<a  href="#" title="添加/修改热图" onclick="ModifyPaper(\''
+                                        + value.id
                                         + '\')">添加/修改热图</a> ';
                                     var d = '<a  href="#" title="预览" onclick="remove(\''
-                                        + row.id
+                                        + value.id
                                         + '\')">预览</a> ';
-                                    var f = '<a  href="#" title="删除" onclick="resetPwd(\''
-                                        + row.id
+                                    var f = '<a  href="#" title="删除" onclick="DelPaper(\''
+                                        + value.id
                                         + '\')">删除</a> ';
-                                    var g = '<a  href="#" title="生成Html" onclick="resetPwd(\''
-                                        + row.id
+                                    var g = '<a  href="#" title="生成Html" onclick="HtmlSave(\''
+                                        + value.id
                                         + '\')">生成Html</a> ';
 
                                     html += "<tr  align='center'>"
@@ -147,6 +147,7 @@ function add() {
         content : prefix + '/add' // iframe的url
     });
 }
+
 function ModifyNewsPaper(id) {
     layer.open({
         type : 2,
@@ -158,7 +159,7 @@ function ModifyNewsPaper(id) {
     });
 }
 function DelNewsPaper(id) {
-    layer.confirm('确定要删除选中的记录？', {
+    layer.confirm('确定要删除吗？删除此期刊同时将删除所包含的版面和新闻，并且不能恢复！', {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
@@ -179,39 +180,47 @@ function DelNewsPaper(id) {
     })
 }
 
-function resetPwd(id) {
+function AddPaper(publishid) {
+    layer.open({
+        type : 2,
+        title : '添加版面',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '500px' ],
+        content : '/epaper/rect/add/'+publishid // iframe的url
+    });
 }
-function batchRemove() {
-    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-    if (rows.length == 0) {
-        layer.msg("请选择要删除的数据");
-        return;
-    }
-    layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
+
+function DelPaper(id) {
+    layer.confirm('确定要删除吗？删除此版面同时将删除该版面下的所有新闻，并且不能恢复！', {
         btn : [ '确定', '取消' ]
-        // 按钮
     }, function() {
-        var ids = new Array();
-        // 遍历所有选择的行数据，取每条数据对应的ID
-        $.each(rows, function(i, row) {
-            ids[i] = row['id'];
-        });
         $.ajax({
-            type : 'POST',
+            url : "/epaper/rect/remove",
+            type : "post",
             data : {
-                "ids" : ids
+                'id' : id
             },
-            url : prefix + '/batchRemove',
             success : function(r) {
-                if (r.code == 0) {
+                if (r.code==0) {
                     layer.msg(r.msg);
                     reLoad();
-                } else {
+                }else{
                     layer.msg(r.msg);
                 }
             }
         });
-    }, function() {
+    })
+}
 
+function ModifyPaper(id) {
+    var modifyPaper = layer.open({
+        type : 2,
+        title : '版面修改',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '500px' ],
+        content : '/epaper/paper/modifyPaper/'+id // iframe的url
     });
+    layer.full(modifyPaper);
 }

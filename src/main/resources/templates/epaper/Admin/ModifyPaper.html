@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+<link href="/epaper/Images/skin.css" rel="stylesheet" type="text/css" />
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td width="17" height="29" valign="top" background="/epaper/Images/mail_leftbg.gif"><img src="/epaper/Images/left-top-right.gif" width="17" height="29" /></td>
+        <td height="29" valign="top" background="/epaper/Images/content-bg.gif"><div class="titlebt"></div></td>
+        <td width="22" valign="top" background="/epaper/Images/mail_rightbg.gif"><img src="/epaper/Images/nav-right-bg.gif" width="16" height="29" /></td>
+    </tr>
+    <tr>
+        <td valign="middle" background="/epaper/Images/mail_leftbg.gif">&nbsp;</td>
+        <td valign="top" bgcolor="#F7F8F9">
+            <form name="ModifyPaper" method="post" action="ModifyPaper.php" onSubmit="return CheckForm();">
+                <table width="100%"  border="1" cellspacing="0" cellpadding="0" class="colorTest">
+                    <tr class="tdbg">
+                        <td align="right">所属期刊：</td>
+                        <td colspan="2" align="left">
+                            <input name="ID" type="hidden" value="<?=$ID?>">
+                            <input name="PublishDate" type="text" value="<?=$Rs[PublishDate]?>" readonly>
+                        </td>
+                    </tr>
+                    <tr class="tdbg">
+                        <td align="right">所属版面：</td>
+                        <td colspan="2" align="left"><input name="VerOrder" type="text" value="<?=$Rs[VerOrder]?>" size="20" maxlength="30">
+                            <input name="IsFrist" type="checkbox" id="IsFrist" onClick="javascript:ChkIsPic();" value="1" <? if($Rs[IsFrist]=='1'){ ?>checked="checked" <? }?>/>如果为第一版，请勾选上，其余版面不需要勾选，务必注意！
+                        </td>
+                    </tr>
+                    <tr class="tdbg">
+                        <td align="right">版面名称：</td>
+                        <td colspan="2" align="left"><input name="BanMian" type="text" value="<?=$Rs[BanMian]?>" size="20" maxlength="30"></td>
+                    </tr>
+                    <tr style="display:none;" id="DisIsPic">
+                        <td height="8" align="right" class="tdbg">首版图片：</td>
+                        <td height="8" colspan="2" align="left"><input name="PicFile" type="text" size="40" id="PicFile" value="<?=$Rs[PicFile]?>" />
+                            <input type="button" value="从编辑器中选择" onClick="Get_FCKeditor_Img();" class="button" />
+                            <div id="eImg"></div>请点击图片！
+                        </td>
+                    <tr class="tdbg">
+                        <td align="right">PDF下载地址：</td>
+                        <td valign="baseline" align="left">
+                            <input name="PdfFile" type="text" id="PdfFile" size="30" maxlength="200" value="<?=$Rs[PdfFile]?>">
+                            <iframe src="UpPdf.php?ID=PdfFile" width="320" height="25" frameborder="0" scrolling="no"></iframe>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="29" align="right">版面热点：<br>
+                            报刊样图大小为<span class="left_ts">378*550</span>像素<br>
+                            添加热点时选中图片，将编辑<br>器的滚动条拉到顶端，点击热<br>点图标描热点（第二个图标）<br>
+                        </td>
+                        <td colspan="2" valign="top" >
+
+                        </td>
+                    </tr>
+                    <tr class="tdbg">
+                        <td align="right">&nbsp;</td>
+                        <td colspan="2" align="left">
+                            <input name="submit" type="submit" value=" 添加/修改 "></td>
+                    </tr>
+                </table>
+            </form></td>
+        <td background="/epaper/Images/mail_rightbg.gif">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="middle" background="/epaper/Images/mail_leftbg.gif"><img src="/epaper/Images/buttom_left2.gif" width="17" height="17" /></td>
+        <td height="17" valign="top" background="/epaper/Images/buttom_bgs.gif"><img src="/epaper/Images/buttom_bgs.gif" width="17" height="17" /></td>
+        <td background="/epaper/Images/mail_rightbg.gif"><img src="/epaper/Images/buttom_right2.gif" width="16" height="17" /></td>
+    </tr>
+</table>
+
+<div th:include="include::footer"></div>
+<script language="JavaScript" type="text/javascript" src="/epaper/Js/paper.js"></script>
+<script language="javascript" type="text/javascript" src="http://js.users.51.la/4483934.js"></script>
+</body>
+</html>

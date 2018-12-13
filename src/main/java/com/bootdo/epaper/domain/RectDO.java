@@ -20,7 +20,7 @@ public class RectDO implements Serializable {
 	//
 	private String verorder;
 	//
-	private Date publishdate;
+	private String publishdate;
 	//
 	private String picfile;
 	//
@@ -58,18 +58,15 @@ public class RectDO implements Serializable {
 	public String getVerorder() {
 		return verorder;
 	}
-	/**
-	 * 设置：
-	 */
-	public void setPublishdate(Date publishdate) {
-		this.publishdate = publishdate;
-	}
-	/**
-	 * 获取：
-	 */
-	public Date getPublishdate() {
+
+	public String getPublishdate() {
 		return publishdate;
 	}
+
+	public void setPublishdate(String publishdate) {
+		this.publishdate = publishdate;
+	}
+
 	/**
 	 * 设置：
 	 */

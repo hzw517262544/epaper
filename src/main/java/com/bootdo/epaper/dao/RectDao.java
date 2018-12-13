@@ -29,4 +29,6 @@ public interface RectDao {
 	int remove(Integer ID);
 	
 	int batchRemove(Integer[] ids);
+
+	int removeByPublisId(Integer publishid);
 }

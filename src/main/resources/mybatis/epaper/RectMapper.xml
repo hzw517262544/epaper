@@ -99,4 +99,8 @@
 		</foreach>
 	</delete>
 
+	<delete id="removeByPublisId">
+		delete from epaper_rect where publishid = #{value}
+	</delete>
+
 </mapper>

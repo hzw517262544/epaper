@@ -27,4 +27,6 @@ public interface RectService {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+	int removeByPublisId(Integer publishid);
 }

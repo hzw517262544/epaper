@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.common.utils.DateUtils;
+import com.bootdo.epaper.domain.PaperDO;
+import com.bootdo.epaper.service.PaperService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -35,6 +38,9 @@ import com.bootdo.common.utils.R;
 public class RectController {
 	@Autowired
 	private RectService rectService;
+
+	@Autowired
+	private PaperService paperService;
 	
 	@GetMapping()
 //	@RequiresPermissions("epaper:rect:rect")
@@ -54,14 +60,16 @@ public class RectController {
 		return pageUtils;
 	}
 	
-	@GetMapping("/add")
+	@GetMapping("/add/{publishid}")
 //	@RequiresPermissions("epaper:rect:add")
-	String add(){
-	    return "epaper/rect/add";
+	String add(@PathVariable("publishid")Long publishid,Model model){
+		PaperDO paperDO = paperService.get(publishid);
+		model.addAttribute("paperDO",paperDO);
+	    return "epaper/Admin/AddPaper";
 	}
 
 	@GetMapping("/edit/{id}")
-	@RequiresPermissions("epaper:rect:edit")
+//	@RequiresPermissions("epaper:rect:edit")
 	String edit(@PathVariable("id") Integer id,Model model){
 		RectDO rect = rectService.get(id);
 		model.addAttribute("rect", rect);
@@ -75,6 +83,13 @@ public class RectController {
 	@PostMapping("/save")
 //	@RequiresPermissions("epaper:rect:add")
 	public R save( RectDO rect){
+		Map<String,Object> parMap = new HashMap<String,Object>();
+		parMap.put("publishdate",rect.getPublishdate());
+		parMap.put("verorder",rect.getVerorder());
+		int count = rectService.count(parMap);
+		if(count>0){
+			return R.error().put("msg","此期刊中已添加该报纸版面"+rect.getVerorder()+"，请添加其他版面！");
+		}
 		if(rectService.save(rect)>0){
 			return R.ok();
 		}

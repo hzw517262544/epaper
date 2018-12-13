@@ -51,5 +51,9 @@ public class RectServiceImpl implements RectService {
 	public int batchRemove(Integer[] ids){
 		return rectDao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public int removeByPublisId(Integer publishid) {
+		return rectDao.removeByPublisId(publishid);
+	}
 }
