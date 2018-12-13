@@ -150,7 +150,7 @@ function add() {
 function ModifyNewsPaper(id) {
     layer.open({
         type : 2,
-        title : '编辑',
+        title : '期数编辑',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '800px', '500px' ],
