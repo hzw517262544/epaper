@@ -1,8 +1,10 @@
 package com.bootdo.epaper.service.impl;
 
+import com.bootdo.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +36,8 @@ public class NewsServiceImpl implements NewsService {
 	
 	@Override
 	public int save(NewsDO news){
+		news.setInfotime(new Date());
+		news.setHits(0);
 		return newsDao.save(news);
 	}
 	
