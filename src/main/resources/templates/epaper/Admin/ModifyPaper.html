@@ -19,31 +19,31 @@
                     <tr class="tdbg">
                         <td align="right">所属期刊：</td>
                         <td colspan="2" align="left">
-                            <input name="ID" type="hidden" value="<?=$ID?>">
-                            <input name="PublishDate" type="text" value="<?=$Rs[PublishDate]?>" readonly>
+                            <input name="id" type="text" th:value="${rect.id}" hidden="hidden">
+                            <input name="publishdate" type="text" th:value="${rect.publishdate}">
                         </td>
                     </tr>
                     <tr class="tdbg">
                         <td align="right">所属版面：</td>
-                        <td colspan="2" align="left"><input name="VerOrder" type="text" value="<?=$Rs[VerOrder]?>" size="20" maxlength="30">
-                            <input name="IsFrist" type="checkbox" id="IsFrist" onClick="javascript:ChkIsPic();" value="1" <? if($Rs[IsFrist]=='1'){ ?>checked="checked" <? }?>/>如果为第一版，请勾选上，其余版面不需要勾选，务必注意！
+                        <td colspan="2" align="left"><input name="verorder" type="text"  th:value="${rect.verorder}" size="20" maxlength="30">
+                            <input name="IsFrist" type="checkbox" id="IsFrist" onClick="javascript:ChkIsPic();" value="1" />如果为第一版，请勾选上，其余版面不需要勾选，务必注意！
                         </td>
                     </tr>
                     <tr class="tdbg">
                         <td align="right">版面名称：</td>
-                        <td colspan="2" align="left"><input name="BanMian" type="text" value="<?=$Rs[BanMian]?>" size="20" maxlength="30"></td>
+                        <td colspan="2" align="left"><input name="banmian" type="text"  th:value="${rect.banmian}" size="20" maxlength="30"></td>
                     </tr>
                     <tr style="display:none;" id="DisIsPic">
                         <td height="8" align="right" class="tdbg">首版图片：</td>
-                        <td height="8" colspan="2" align="left"><input name="PicFile" type="text" size="40" id="PicFile" value="<?=$Rs[PicFile]?>" />
+                        <td height="8" colspan="2" align="left"><input name="picfile" type="text" size="40" id="picfile"  th:value="${rect.picfile}" />
                             <input type="button" value="从编辑器中选择" onClick="Get_FCKeditor_Img();" class="button" />
                             <div id="eImg"></div>请点击图片！
                         </td>
                     <tr class="tdbg">
                         <td align="right">PDF下载地址：</td>
                         <td valign="baseline" align="left">
-                            <input name="PdfFile" type="text" id="PdfFile" size="30" maxlength="200" value="<?=$Rs[PdfFile]?>">
-                            <iframe src="UpPdf.php?ID=PdfFile" width="320" height="25" frameborder="0" scrolling="no"></iframe>
+                            <input name="pdffile" type="text" id="pdffile" size="30" maxlength="200"  th:value="${rect.pdffile}">
+                            <iframe src="" width="320" height="25" frameborder="0" scrolling="no"></iframe>
                         </td>
                     </tr>
                     <tr>
