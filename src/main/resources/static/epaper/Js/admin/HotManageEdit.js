@@ -1,4 +1,7 @@
 $().ready(function() {
+    laydate({
+        elem : '#publishdate'
+    });
 	validateRule();
 });
 

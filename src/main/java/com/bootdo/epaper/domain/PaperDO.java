@@ -18,7 +18,7 @@ public class PaperDO implements Serializable {
 	//
 	private Integer publishid;
 	//
-	private Date publishdate;
+	private String publishdate;
 	//
 	private Long id;
 
@@ -34,18 +34,15 @@ public class PaperDO implements Serializable {
 	public Integer getPublishid() {
 		return publishid;
 	}
-	/**
-	 * 设置：
-	 */
-	public void setPublishdate(Date publishdate) {
-		this.publishdate = publishdate;
-	}
-	/**
-	 * 获取：
-	 */
-	public Date getPublishdate() {
+
+	public String getPublishdate() {
 		return publishdate;
 	}
+
+	public void setPublishdate(String publishdate) {
+		this.publishdate = publishdate;
+	}
+
 	/**
 	 * 设置：
 	 */

@@ -73,7 +73,7 @@ public class PaperController {
 	String edit(@PathVariable("id") Long id,Model model){
 		PaperDO paper = paperService.get(id);
 		model.addAttribute("paper", paper);
-	    return "epaper/paper/edit";
+	    return "epaper/Admin/HotManage_Edit";
 	}
 	
 	/**
@@ -85,11 +85,11 @@ public class PaperController {
 	public R save( PaperDO paper){
 		//校验该日期的报纸是否已添加
 		Map<String,Object> parMap = new HashMap<String,Object>();
-		String publishdate = DateUtils.format(paper.getPublishdate(),"yyyy-MM-dd");
-		parMap.put("publishdate",publishdate);
+//		String publishdate = DateUtils.format(paper.getPublishdate(),"yyyy-MM-dd");
+		parMap.put("publishdate",paper.getPublishdate());
 		int count = paperService.count(parMap);
 		if(count>0){
-			return R.error().put("msg","已添加"+publishdate+"的报纸，请勿重复添加！");
+			return R.error().put("msg","已添加"+paper.getPublishdate()+"的报纸，请勿重复添加！");
 		}
 		if(paperService.save(paper)>0){
 			return R.ok().put("msg","期刊添加成功！");
