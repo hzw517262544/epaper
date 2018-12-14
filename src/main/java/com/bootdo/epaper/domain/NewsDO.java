@@ -22,7 +22,7 @@ public class NewsDO implements Serializable {
 	//
 	private String content;
 	//
-	private Date publishdate;
+	private String publishdate;
 	//
 	private String verorder;
 	//
@@ -32,7 +32,7 @@ public class NewsDO implements Serializable {
 	//
 	private String user;
 	//
-	private Date infotime;
+	private String infotime;
 	//
 	private Integer hits;
 	//副标题
@@ -74,18 +74,15 @@ public class NewsDO implements Serializable {
 	public String getContent() {
 		return content;
 	}
-	/**
-	 * 设置：
-	 */
-	public void setPublishdate(Date publishdate) {
-		this.publishdate = publishdate;
-	}
-	/**
-	 * 获取：
-	 */
-	public Date getPublishdate() {
+
+	public String getPublishdate() {
 		return publishdate;
 	}
+
+	public void setPublishdate(String publishdate) {
+		this.publishdate = publishdate;
+	}
+
 	/**
 	 * 设置：
 	 */
@@ -134,18 +131,15 @@ public class NewsDO implements Serializable {
 	public String getUser() {
 		return user;
 	}
-	/**
-	 * 设置：
-	 */
-	public void setInfotime(Date infotime) {
-		this.infotime = infotime;
-	}
-	/**
-	 * 获取：
-	 */
-	public Date getInfotime() {
+
+	public String getInfotime() {
 		return infotime;
 	}
+
+	public void setInfotime(String infotime) {
+		this.infotime = infotime;
+	}
+
 	/**
 	 * 设置：
 	 */

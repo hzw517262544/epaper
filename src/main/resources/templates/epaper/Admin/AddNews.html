@@ -1,79 +1,72 @@
 <!DOCTYPE html>
-<html lang="zh_CN">
-<link href="/epaper/Images/skin.css" rel="stylesheet" type="text/css" />
-<script language="javascript" src="/epaper/Js/WebCalendar.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<head th:include="include :: header">
-</head>
-<body>
-<table width="100%" border="0" cellpadding="0" cellspacing="0">
-    <tr>
-        <td width="17" height="29" valign="top" background="/epaper/Images/mail_leftbg.gif"><img src="/epaper/Images/left-top-right.gif" width="17" height="29" /></td>
-        <td height="29" valign="top" background="/epaper/Images/content-bg.gif"><div class="titlebt"></div></td>
-        <td width="22" valign="top" background="/epaper/Images/mail_rightbg.gif"><img src="/epaper/Images/nav-right-bg.gif" width="16" height="29" /></td>
-    </tr>
-    <tr>
-        <td height="181" valign="middle" background="/epaper/Images/mail_leftbg.gif">&nbsp;</td>
-        <td valign="top" bgcolor="#F7F8F9">
-            <form id="AddNews">
-                <table width="100%"  border="1" cellspacing="0" cellpadding="0" class="colorTest">
-                    <tr>
-                        <td width="18%" height="30" align="right">新闻标题：</td>
-                        <td width="82%" height="30" align="left"><input name="title" type="text" size="70" maxlength="100"></td>
-                    </tr>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">新闻标题：</label>
+                            <div class="col-sm-4">
+                                <input id="title" name="title" class="form-control" type="text">
+                            </div>
+                            <label class="col-sm-2 control-label">副标题：</label>
+                            <div class="col-sm-4">
+                                <input id="subTitle" name="subTitle" class="form-control" type="text">
+                            </div>
+                        </div>
 
-                    <tr>
-                        <td width="18%" height="30" align="right">副标题：</td>
-                        <td width="82%" height="30" align="left"><input name="subTitle" type="text" size="70" maxlength="100"></td>
-                    </tr>
-
-                    <tr>
-                        <td height="30" align="right">所属版面：</td>
-                        <td height="30" align="left">
-                            <select name="publishdate" id="publishdate" size="1" style="height: 30px;width: 200px;">
-                                <option th:each="paper : ${papers}" th:value="${paper.publishdate}" th:text="${paper.publishdate}+' 总第'+${paper.publishid}+'期'"></option>
-                            </select>
-                            <select name="verorderid" id="verorderid"  style="height: 30px;width: 200px;">
-                                <option th:each="rect : ${rects}" th:value="${rect.id}" th:text="${rect.verorder}"></option>
-                            </select></td>
-                            <input id="verorder" name="verorder" type="hidden">
-                    </tr>
-                    <tr title="如果您是从PDF文件上复制过来的文章请先点击'自动分段'按钮，然后点击'自动排版'，如果有多余的空段落，请连续点击三次以上'自动排版'。程序并不能完全识别段落，如有不正确，请自行调整。（产生段落主要是在?和。间）">
-                        <td height="500"  align="right">新闻内容：
-                        </td>
-                        <td height="500" align="left">
-                            <div id="content_sn" class="summernote"></div>
-                            <input id="content" name="content" type="hidden">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td height="32" align="right">新闻作者： </td>
-                        <td height="32" align="left"><input name="user" type="text" size="30" value="肥西报"></td>
-                    </tr>
-                    <tr>
-                        <td height="15" align="right">新闻来源：</td>
-                        <td height="15" align="left"><input name="come" type="text" value="本报讯" size="30" maxlength="30"></td>
-                    </tr>
-                    <tr>
-                        <td height="30" colspan="2" align="center">
-                            <input type="submit" name="submit" value="提交">
-                            <input type="button" name="reset" onclick="resetForm();" value="重置">
-                        </td>
-                    </tr>
-                </table></form>
-        </td>
-        <td background="/epaper/Images/mail_rightbg.gif">&nbsp;</td>
-    </tr>
-    <tr>
-        <td valign="middle" background="Images/mail_leftbg.gif"><img src="Images/buttom_left2.gif" width="17" height="17" /></td>
-        <td height="17" valign="top" background="Images/buttom_bgs.gif"><img src="Images/buttom_bgs.gif" width="17" height="17" /></td>
-        <td background="Images/mail_rightbg.gif"><img src="Images/buttom_right2.gif" width="16" height="17" /></td>
-    </tr>
-</table>
-
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属版面：</label>
+                            <div class="col-sm-10">
+                                <select name="publishdate" id="publishdate" size="1" style="height: 30px;width: 200px;">
+                                    <option th:each="paper : ${papers}" th:value="${paper.publishdate}" th:text="${paper.publishdate}+' 总第'+${paper.publishid}+'期'"></option>
+                                </select>
+                                <select name="verorderid" id="verorderid"  style="height: 30px;width: 200px;">
+                                    <option th:each="rect : ${rects}" th:value="${rect.id}" th:text="${rect.verorder}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" hidden="hidden">
+                            <label class="col-sm-2 control-label">所属版面：</label>
+                            <div class="col-sm-10">
+                                <input id="verorder" name="verorder" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">新闻内容：</label>
+                            <div class="col-sm-10">
+                                <div id="content_sn" class="summernote"></div>
+                                <input id="content" name="content" type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">新闻作者：</label>
+                            <div class="col-sm-4">
+                                <input id="user" name="user" class="form-control" type="text" value="电子报">
+                            </div>
+                            <label class="col-sm-2 control-label">新闻来源：</label>
+                            <div class="col-sm-4">
+                                <input id="come" name="come" class="form-control" type="text" value="本报讯">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary">添加</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/epaper/Js/admin/AddNews.js"></script>
+<script type="text/javascript" src="/epaper/Js/admin/AddNews.js">
+</script>
 </body>
-
 </html>

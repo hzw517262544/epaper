@@ -48,23 +48,9 @@ public class NewsController {
 	
 	@GetMapping()
 //	@RequiresPermissions("epaper:news:news")
-	String News(Model model){
-		//加载最近100期
-		Map<String,Object> parMap = new HashMap<String,Object>();
-		parMap.put("offset",0);
-		parMap.put("limit",100);
-		List<PaperDO> paperDOS = paperService.list(parMap);
-		model.addAttribute("papers",paperDOS);
-		List<RectDO> rectDOS = null;
-		if(paperDOS!=null&&!paperDOS.isEmpty()){
-			parMap.clear();
-			parMap.put("publishid",paperDOS.get(0).getPublishid());
-			rectDOS = rectService.list(parMap);
-		}else{
-			rectDOS = new ArrayList<RectDO>();
-		}
-		model.addAttribute("rects",rectDOS);
-	    return "epaper/Admin/AddNews";
+	String News(){
+
+	    return "epaper/Admin/NewsManage";
 	}
 	
 	@ResponseBody
@@ -81,8 +67,23 @@ public class NewsController {
 	
 	@GetMapping("/add")
 //	@RequiresPermissions("epaper:news:add")
-	String add(){
-	    return "epaper/news/add";
+	String add(Model model){
+		//加载最近100期
+		Map<String,Object> parMap = new HashMap<String,Object>();
+		parMap.put("offset",0);
+		parMap.put("limit",100);
+		List<PaperDO> paperDOS = paperService.list(parMap);
+		model.addAttribute("papers",paperDOS);
+		List<RectDO> rectDOS = null;
+		if(paperDOS!=null&&!paperDOS.isEmpty()){
+			parMap.clear();
+			parMap.put("publishid",paperDOS.get(0).getPublishid());
+			rectDOS = rectService.list(parMap);
+		}else{
+			rectDOS = new ArrayList<RectDO>();
+		}
+		model.addAttribute("rects",rectDOS);
+	    return "epaper/Admin/AddNews";
 	}
 
 	@GetMapping("/edit/{id}")

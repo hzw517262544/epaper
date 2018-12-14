@@ -57,10 +57,10 @@ function save() {
         },
         success : function(data) {
             if (data.code == 0) {
-
-                // $('#AddNews').get(0).reset();
-                $("#content_sn").summernote('reset');
                 parent.layer.msg("操作成功");
+                parent.reLoad();
+                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                parent.layer.close(index);
             } else {
                 parent.layer.alert(data.msg)
             }
@@ -110,6 +110,6 @@ function validateRule() {
 }
 
 function resetForm() {
-    // $('#AddNews')[0].reset();
+    $('#AddNews')[0].reset;
     $("#content_sn").summernote('reset');
 }

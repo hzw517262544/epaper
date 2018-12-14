@@ -12,11 +12,12 @@ import com.bootdo.epaper.dao.NewsDao;
 import com.bootdo.epaper.domain.NewsDO;
 import com.bootdo.epaper.service.NewsService;
 
+import javax.annotation.Resource;
 
 
 @Service
 public class NewsServiceImpl implements NewsService {
-	@Autowired
+	@Resource
 	private NewsDao newsDao;
 	
 	@Override
@@ -36,7 +37,7 @@ public class NewsServiceImpl implements NewsService {
 	
 	@Override
 	public int save(NewsDO news){
-		news.setInfotime(new Date());
+		news.setInfotime(DateUtils.format(new Date(),"yyyy-MM-dd"));
 		news.setHits(0);
 		return newsDao.save(news);
 	}
