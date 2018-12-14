@@ -91,7 +91,7 @@ public class NewsController {
 	String edit(@PathVariable("id") Integer id,Model model){
 		NewsDO news = newsService.get(id);
 		model.addAttribute("news", news);
-	    return "epaper/news/edit";
+	    return "epaper/Admin/ModifyNews";
 	}
 	
 	/**

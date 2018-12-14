@@ -96,16 +96,16 @@ function load() {
                         field : 'id',
                         align : 'center',
                         formatter : function(value, row, index) {
-                            var e = '<a  href="#" mce_href="#" title="编辑" onclick="edit(\''
+                            var e = '<a  href="#" mce_href="#" title="修改" onclick="edit(\''
                                 + row.id
-                                + '\')"><i class="fa fa-edit"></i></a> ';
+                                + '\')">修改</a> ';
                             var d = '<a  href="#" title="删除"  mce_href="#" onclick="remove(\''
                                 + row.id
-                                + '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<a  href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+                                + '\')">删除</a> ';
+                            var f = '<a  href="#" title="生成"  mce_href="#" onclick="resetPwd(\''
                                 + row.id
-                                + '\')"><i class="fa fa-key"></i></a> ';
-                            return e + d ;
+                                + '\')">生成</a> ';
+                            return e+" | " + d+" | " + f;
                         }
                     } ]
             });
@@ -125,17 +125,18 @@ function add() {
     layer.full(add);
 }
 function edit(id) {
-    layer.open({
+    var edit = layer.open({
         type : 2,
-        title : '编辑',
+        title : '新闻修改',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '800px', '520px' ],
         content : prefix + '/edit/' + id // iframe的url
     });
+    layer.full(edit);
 }
 function remove(id) {
-    layer.confirm('确定要删除选中的记录？', {
+    layer.confirm('您确定删除吗?此操作将不能恢复!', {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({

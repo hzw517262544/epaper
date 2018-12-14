@@ -1,6 +1,6 @@
 $().ready(function() {
     $('.summernote').summernote({
-        height : '500px',
+        height : '300px',
         lang : 'zh-CN',
         callbacks: {
             onImageUpload: function(files, editor, $editable) {
@@ -50,7 +50,7 @@ function save() {
         cache : true,
         type : "POST",
         url : "/epaper/news/save",
-        data : $('#AddNews').serialize(),// 你的formid
+        data : $('#signupForm').serialize(),// 你的formid
         async : false,
         error : function(request) {
             parent.layer.alert("Connection error");
@@ -71,7 +71,7 @@ function save() {
 }
 function validateRule() {
     var icon = "<i class='fa fa-times-circle'></i> ";
-    $("#AddNews").validate({
+    $("#signupForm").validate({
         rules : {
             title : {
                 required : true
@@ -110,6 +110,6 @@ function validateRule() {
 }
 
 function resetForm() {
-    $('#AddNews')[0].reset;
+    $('#signupForm')[0].reset;
     $("#content_sn").summernote('reset');
 }
