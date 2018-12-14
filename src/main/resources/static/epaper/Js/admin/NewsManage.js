@@ -45,7 +45,18 @@ function load() {
                 // 返回false将会终止请求
                 columns : [
                     {
-                        checkbox : true
+                        field: 'no',
+                        title: '序号',
+                        align:'center',
+                        width: 50,
+                        formatter: function (value, row, index) {
+                            //获取每页显示的数量
+                            var pageSize=$('#exampleTable').bootstrapTable('getOptions').pageSize;
+                            //获取当前是第几页
+                            var pageNumber=$('#exampleTable').bootstrapTable('getOptions').pageNumber;
+                            //返回序号，注意index是从0开始的，所以要加上1
+                            return pageSize * (pageNumber - 1) + index + 1;
+                        }
                     },
                     {
                         field : 'title',
