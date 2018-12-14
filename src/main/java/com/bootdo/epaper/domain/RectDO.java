@@ -34,6 +34,8 @@ public class RectDO implements Serializable {
 	//
 	private Integer publishid;
 
+	private String selected;
+
 	/**
 	 * 设置：
 	 */
@@ -138,5 +140,13 @@ public class RectDO implements Serializable {
 	 */
 	public Integer getPublishid() {
 		return publishid;
+	}
+
+	public String getSelected() {
+		return selected;
+	}
+
+	public void setSelected(String selected) {
+		this.selected = selected;
 	}
 }

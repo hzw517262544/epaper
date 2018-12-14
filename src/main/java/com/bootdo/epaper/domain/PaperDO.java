@@ -22,6 +22,9 @@ public class PaperDO implements Serializable {
 	//
 	private Long id;
 
+	private String selected;
+
+
 	/**
 	 * 设置：
 	 */
@@ -54,5 +57,13 @@ public class PaperDO implements Serializable {
 	 */
 	public Long getId() {
 		return id;
+	}
+
+	public String getSelected() {
+		return selected;
+	}
+
+	public void setSelected(String selected) {
+		this.selected = selected;
 	}
 }
