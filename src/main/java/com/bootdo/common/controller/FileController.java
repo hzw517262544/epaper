@@ -6,12 +6,15 @@ import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.*;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -156,6 +159,27 @@ public class FileController extends BaseController {
 			return R.ok().put("fileName",sysFile.getUrl()).put("sysFile",sysFile);
 		}
 		return R.error();
+	}
+
+
+	@ResponseBody
+	@PostMapping("/uploadCk")
+	R uploadCk(@RequestParam("upload")MultipartFile[] files) {
+		if(files!=null&&files.length>0){
+			for(MultipartFile file : files){
+				String fileName = file.getOriginalFilename();
+				fileName = FileUtil.renameToUUID(fileName);
+				FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/"+DateUtils.getReqDate()+"/" + fileName, new Date());
+				try {
+					FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath()+DateUtils.getReqDate()+"/", fileName);
+				} catch (Exception e) {
+					return R.error();
+				}
+				sysFileService.save(sysFile);
+			}
+		}
+
+		return R.ok();
 	}
 
 
