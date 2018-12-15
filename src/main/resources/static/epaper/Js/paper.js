@@ -4,7 +4,7 @@ function ChkIsPic()
 	obj.style.display = obj.style.display == "none" ? "" : "none";
 }
 
-if(document.getElementById("IsFrist").checked)
+if(document.getElementById("isfrist").checked)
 	document.getElementById("DisIsPic").style.display = "";
 	
 function Get_FCKeditor_Img()

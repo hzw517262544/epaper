@@ -7,6 +7,7 @@ import java.util.Map;
 import com.bootdo.common.utils.DateUtils;
 import com.bootdo.epaper.domain.PaperDO;
 import com.bootdo.epaper.service.PaperService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -102,6 +103,9 @@ public class RectController {
 	@RequestMapping("/update")
 //	@RequiresPermissions("epaper:rect:edit")
 	public R update( RectDO rect){
+		if(rect.getIsfrist()==null){
+			rect.setIsfrist(0);
+		}
 		rectService.update(rect);
 		return R.ok();
 	}
