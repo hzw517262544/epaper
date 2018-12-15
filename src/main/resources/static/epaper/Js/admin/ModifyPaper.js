@@ -1,5 +1,6 @@
 $().ready(function() {
 	validateRule();
+    initFCK();
     //选择文件触发事件
     $("#pdfFiles").change(function () {
         upLoadPdfFile();
@@ -78,4 +79,13 @@ function upLoadPdfFile() {
             alert("上传失败！");
         }
     });
+}
+
+function initFCK() {
+    var rect = document.getElementById("rect");
+    var fck = new FCKeditor("rect");
+    fck.BasePath = "fckeditor/" ;
+    fck.Width = "415" ;
+    fck.Height="400";
+    rect.innerHTML = fck.CreateHtml();
 }
