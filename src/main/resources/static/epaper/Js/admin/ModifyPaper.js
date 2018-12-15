@@ -1,5 +1,9 @@
 $().ready(function() {
 	validateRule();
+    //选择文件触发事件
+    $("#pdfFiles").change(function () {
+        upLoadPdfFile();
+    });
 });
 
 $.validator.setDefaults({
@@ -46,4 +50,32 @@ function validateRule() {
 			}
 		}
 	})
+}
+
+function upLoadPdfFile() {
+    var file = document.getElementById('pdfFiles').files[0];
+    var size = file.size;
+    if((size / 1024 / 1024) > 10) {
+        alert("文件大小不能超过10M...");
+        return false;
+    }
+    console.log("size="+size);
+    var formData = new FormData();
+    formData.append("file", file);
+    $.ajax({
+        data : formData,
+        type : "POST",
+        url : "/common/sysFile/upload",    // 图片上传出来的url，返回的是图片上传后的路径，http格式
+        cache : false,
+        contentType : false,
+        processData : false,
+        dataType : "json",
+        success: function(data) {//data是返回的hash,key之类的值，key是定义的文件名
+            layer.msg("上传成功！");
+            $("#pdffile").val(data.fileName);
+        },
+        error:function(){
+            alert("上传失败！");
+        }
+    });
 }

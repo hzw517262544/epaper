@@ -45,11 +45,15 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">PDF下载地址：</label>
                             <div class="col-sm-5">
-                                <input th:value="${rect.pdffile}" id="pdffile" name="pdffile" class="form-control" type="text">
+                                <input readonly="readonly" th:value="${rect.pdffile}" id="pdffile" name="pdffile" class="form-control" type="text">
+                                <input id="pdfFiles" name="pdfFiles" class="form-control" type="file">
+
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">版面热点：</label>
+                            <label class="col-sm-2 control-label">版面热点：<br>
+                                报刊样图大小为<span class="left_ts">378*550</span>像素<br>
+                                添加热点时选中图片，将编辑<br>器的滚动条拉到顶端，点击热<br>点图标描热点（第二个图标）</label>
                             <div class="col-sm-5">
                                 <input th:value="${rect.rect}" id="rect" name="rect" class="form-control" type="text">
                             </div>

@@ -145,15 +145,15 @@ public class FileController extends BaseController {
 		}
 		String fileName = file.getOriginalFilename();
 		fileName = FileUtil.renameToUUID(fileName);
-		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
+		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/"+DateUtils.getReqDate()+"/" + fileName, new Date());
 		try {
-			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
+			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath()+DateUtils.getReqDate()+"/", fileName);
 		} catch (Exception e) {
 			return R.error();
 		}
 
 		if (sysFileService.save(sysFile) > 0) {
-			return R.ok().put("fileName",sysFile.getUrl());
+			return R.ok().put("fileName",sysFile.getUrl()).put("sysFile",sysFile);
 		}
 		return R.error();
 	}
