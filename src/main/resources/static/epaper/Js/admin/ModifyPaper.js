@@ -1,7 +1,8 @@
 $().ready(function() {
 	validateRule();
 	//初始化热点图片
-    CKEDITOR.replace( 'rect');
+    CKEDITOR.replace( 'rectEditor');
+    CKEDITOR.instances.rectEditor.setData($("#rect").val());
     //选择文件触发事件
     $("#pdfFiles").change(function () {
         upLoadPdfFile();
@@ -14,6 +15,7 @@ $.validator.setDefaults({
 	}
 });
 function update() {
+	$("#rect").val(CKEDITOR.instances.rectEditor.getData());
 	$.ajax({
 		cache : true,
 		type : "POST",

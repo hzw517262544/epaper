@@ -54,7 +54,8 @@
                                 报刊样图大小为<span class="left_ts">378*550</span>像素<br>
                                 添加热点时选中图片，将编辑<br>器的滚动条拉到顶端，点击热<br>点图标描热点（第二个图标）</label>
                             <div class="col-sm-9">
-                                <textarea name="rect" id="rect"  class="ckeditor"/></textarea>
+                                <textarea name="rectEditor" id="rectEditor"  class="ckeditor"/></textarea>
+                                <input  name="rect" id="rect" th:value="${rect.rect}" hidden="hidden">
                             </div>
                         </div>
                         <div class="form-group" hidden="hidden">

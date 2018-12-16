@@ -164,12 +164,12 @@ FCKeditor.prototype._GetConfigHtml = function()
 
 FCKeditor.prototype._GetIFrameHtml = function()
 {
-	var sFile = 'fckeditor.html' ;
+	var sFile = '/epaper/Admin/fckeditor/editor/fckeditor.html' ;
 
 	try
 	{
 		if ( (/fcksource=true/i).test( window.top.location.search ) )
-			sFile = 'fckeditor.original.html' ;
+			sFile = '/epaper/Admin/fckeditor/editor/fckeditor.original.html' ;
 	}
 	catch (e) { /* Ignore it. Much probably we are inside a FRAME where the "top" is in another domain (security error). */ }
 
