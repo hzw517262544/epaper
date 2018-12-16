@@ -5,16 +5,19 @@ import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.tomcat.jni.FileInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +33,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/common/sysFile")
 public class FileController extends BaseController {
+
+	private Logger logger = LoggerFactory.getLogger(FileController.class);
 
 	@Autowired
 	private FileService sysFileService;
@@ -164,22 +169,32 @@ public class FileController extends BaseController {
 
 	@ResponseBody
 	@PostMapping("/uploadCk")
-	R uploadCk(@RequestParam("upload")MultipartFile[] files) {
-		if(files!=null&&files.length>0){
-			for(MultipartFile file : files){
+	public String uploadCk( @RequestParam("upload") MultipartFile file, String CKEditorFuncNum){
+		String name = "";
+		StringBuffer sb = new StringBuffer();
+		if (!file.isEmpty()) {
+			try {
 				String fileName = file.getOriginalFilename();
 				fileName = FileUtil.renameToUUID(fileName);
 				FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/"+DateUtils.getReqDate()+"/" + fileName, new Date());
 				try {
 					FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath()+DateUtils.getReqDate()+"/", fileName);
 				} catch (Exception e) {
-					return R.error();
+					e.printStackTrace();
+					logger.error(e.getMessage());
 				}
 				sysFileService.save(sysFile);
+				sb.append("<script type=\"text/javascript\">");
+				sb.append("window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ",'" + sysFile.getUrl()
+						+ "','')");
+				sb.append("</script>");
+			} catch (Exception e) {
+				logger.info("You failed to upload " + name + " => " + e.getMessage());
 			}
+		} else {
+			logger.info("You failed to upload " + name + " because the file was empty.");
 		}
-
-		return R.ok();
+		return sb.toString();
 	}
 
 

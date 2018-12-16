@@ -12,25 +12,25 @@
                         <input id="id" name="id" th:value="${rect.id}" type="hidden">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">所属期刊：</label>
-                            <div class="col-sm-5">
+                            <div class="col-sm-9">
                                 <input readonly="readonly" th:value="${rect.publishdate}" id="publishdate" name="publishdate" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">所属版面：</label>
-                            <div class="col-sm-5">
+                            <div class="col-sm-9">
                                 <input readonly="readonly" th:value="${rect.verorder}" id="verorder" name="verorder" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">版面名称：</label>
-                            <div class="col-sm-5">
+                            <div class="col-sm-9">
                                 <input readonly="readonly" th:value="${rect.banmian}" id="banmian" name="banmian" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">是否第一版：</label>
-                            <div class="col-sm-5">
+                            <div class="col-sm-9">
                                 <input id="isfrist" name="isfrist" value="1"
                                        onClick="ChkIsPic()" type="checkbox" th:checked=${rect.isfrist==1}>
                                 <font color="red">如果为第一版，请勾选上，其余版面不需要勾选，务必注意！</font>
@@ -38,13 +38,13 @@
                         </div>
                         <div class="form-group" style="display:none;" id="DisIsPic">
                             <label class="col-sm-2 control-label">首版图片：</label>
-                            <div class="col-sm-5">
+                            <div class="col-sm-9">
                                 <input th:value="${rect.picfile}" id="picfile" name="picfile" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">PDF下载地址：</label>
-                            <div class="col-sm-5">
+                            <div class="col-sm-9">
                                 <input readonly="readonly" th:value="${rect.pdffile}" id="pdffile" name="pdffile" class="form-control" type="text">
                                 <input id="pdfFiles" name="pdfFiles" class="form-control" type="file">
                             </div>
@@ -53,18 +53,18 @@
                             <label class="col-sm-2 control-label">版面热点：<br>
                                 报刊样图大小为<span class="left_ts">378*550</span>像素<br>
                                 添加热点时选中图片，将编辑<br>器的滚动条拉到顶端，点击热<br>点图标描热点（第二个图标）</label>
-                            <div class="col-sm-5">
-                                <textarea name="rect" id="rect"/></textarea>
+                            <div class="col-sm-9">
+                                <textarea name="rect" id="rect"  class="ckeditor"/></textarea>
                             </div>
                         </div>
                         <div class="form-group" hidden="hidden">
                             <label class="col-sm-2 control-label">publishid：</label>
-                            <div class="col-sm-5">
+                            <div class="col-sm-9">
                                 <input th:value="${rect.publishid}" id="publishid" name="publishid" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-5 col-sm-offset-3">
+                            <div class="col-sm-9 col-sm-offset-3">
                                 <button type="submit" class="btn btn-primary">添加/修改</button>
                             </div>
                         </div>
